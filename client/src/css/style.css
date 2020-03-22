@@ -1,0 +1,14 @@
+.side-bar{
+    position: fixed;
+    left:0;
+    height: calc(100vh - 20px);
+    z-index:10;
+    overflow:auto ;
+    scrollbar-width:none;
+    padding: 20px;
+    transition: all 0.5s;
+}
+
+.main-content{
+    margin : 0 0 0 280px;
+}
