@@ -25,11 +25,11 @@ const Sidebar = () => {
                 </li>
                 <li className="upload">
                     <Button variant="primary" className="btn">
-                        <i className="fal fa-plus"></i> Create New
+                        <i className="fa fa-plus"></i> Create New
                     </Button>
                 </li>
                 <li className="header"><i className="fa fa-file"></i>  Files </li>
-               
+                
                
             </ul>
         </div>
