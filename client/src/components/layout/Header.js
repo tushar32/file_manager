@@ -7,7 +7,7 @@ const Header = () => {
 
             <div class="row clearfix">
                 <div class="col-lg-5 col-md-5 col-sm-12">
-                    <h2>File Manager</h2>
+                    <h4>File Manager</h4>
                     <ul class="breadcrumb padding-0">
                         <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i></a></li>
                         <li class="breadcrumb-item"><a href="file-dashboard.html">File Manager</a></li>
