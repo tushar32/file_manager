@@ -60,19 +60,26 @@ class Upload extends Component {
       
       axios.post('/upload',data)
       .then(function(res){
-        console.log(res);
 
       })
      })
   }
 
-  removeFile = (e) => {
-    e.preventDefault();
+  removeFile = (e,fileIndex) => {
+    e.stopPropagation();
+    let files = [ ...this.state.files ];
+   
+    const new_files = files.splice(1,fileIndex);
+    this.setState({ files : new_files })
     
   }
 
-  renderProgress(file) {
+  renderProgress(fileIndex) {
     
+    
+    
+
+
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -105,9 +112,9 @@ class Upload extends Component {
 
         <div className="Files" >
           {
-            this.state.files ? this.state.files.map(file => {
+            this.state.files ? this.state.files.map((file,index) => {
               return (
-                  <div key={file.name} className="file-items"> 
+                  <div key={index} className="file-items"> 
                     <div className="file-image">
                         <img src={URL.createObjectURL(file)} />
                       </div>
@@ -121,7 +128,8 @@ class Upload extends Component {
                           </span>
                         </div>
                         <div class="dz-success-mark">
-                          <i class="far fa-times-circle fa-3x" onClick={ this.removeFile }></i>
+                            <a href="javascript:void(0)" onClick={ (e) =>  this.removeFile(e, index) }><i class="far fa-times-circle fa-3x" 
+                          ></i> </a>
                         </div>
                       </div>
                     { this.renderProgress(file)}

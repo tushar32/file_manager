@@ -9,7 +9,7 @@ app.use(express.json({ extended: false }));
 
 const auth = require('api/auth');
 
-app.use('/api/login',auth);
+app.use('/api/auth',auth);
 
 app.post('/upload',fileUpload.single('file'), function(req,res,next){
 

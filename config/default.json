@@ -1,0 +1,4 @@
+{
+    "mongoURI" :  "mongodb+srv://tushar_86:kavir1234@merndev-1j5sb.mongodb.net/file_manager?retryWrites=true",
+    "jwtSecretToken" : "mySecretToken"
+}
