@@ -17,7 +17,7 @@ router.get('/login',[
     const errors = validationResult(req);
 
     if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array()});
+        return res.status(400).json({ errors: errors.mapped()});
     }
 
     const { email,password } = req.body;
@@ -26,13 +26,13 @@ router.get('/login',[
         let user = await User.findOne({ email });
 
         if(!user){
-            return res.status(400).json({ errors: [{ msg: 'Invalid Password'}]})
+            return res.status(400).json({ errors: [{ msg: 'Invalid Credentials'}]})
         }
 
         const isMatch = await bcrypt.compare(password,user.password);
 
         if(!isMatch){
-            return res.status(400).json({ errors: [{ msg: 'Invalid Password'}]})
+            return res.status(400).json({ errors: [{ msg: 'Invalid Credentials'}]})
         }
         const payload = {
             user: {
@@ -49,8 +49,8 @@ router.get('/login',[
 
 
     } catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        console.error(err);
+        res.status(500).send(err);
     }
 })
 
@@ -75,21 +75,13 @@ router.post('/register', [
         if(user){
             return res.status(400).json({ errors: [{ msg: 'User already exist'}]})
         }
-        const avatar = gravtar.url(email, {
-            s: '200',
-            r: 'pg',
-            d: 'mm'
-        })
-        
-        console.log('avatar',avatar);
         
         user = new User({
            name,
            email,
-           avatar,
            password
         });
-
+      
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password,salt);
 
@@ -110,8 +102,10 @@ router.post('/register', [
 
 
     } catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        console.error(err );
+        res.status(500).send(err.message);
     }
  
 });
+
+module.exports = router;

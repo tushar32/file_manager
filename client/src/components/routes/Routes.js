@@ -5,6 +5,7 @@ import Images from '../images/Images';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import PrivateRoute from './PrivateRoute';
+import SessionLayout from './SessionRoute';
 
 const Routes = () => {
 
@@ -13,8 +14,8 @@ const Routes = () => {
         <Switch>
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/images' component={Images} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
+            <SessionLayout exact path='/login' component={Login} />
+            <SessionLayout exact path='/register' component={Register} />
         </Switch>
       </div>
     )

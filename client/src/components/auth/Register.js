@@ -2,9 +2,11 @@ import React,{ Fragment,useState } from 'react';
 import { connect } from 'react-redux';
 // call action type (setAlert) from component and use where you want to call that action
 import { setAlert } from '../../actions/alert';
+import Alert from './../layout/ui/alert';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
 
 const Register = ({ setAlert, register ,isAuth}) => {
 
@@ -39,51 +41,66 @@ const Register = ({ setAlert, register ,isAuth}) => {
 
    return (
      <Fragment>
-       <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
-      <form className="form" onSubmit={e => onSubmit(e) }>
-        <div className="form-group">
-          <input type="text" placeholder="Name" 
-          name="name" 
-          value={name}
-          onChange={e => { onChange(e) } }
-            />
+       <Col lg={6} md={12}>
+       <div className="company_detail">
+            <h4 className="logo">Alpino</h4>
+            <h3>The ultimate <strong>Bootstrap 4</strong> Admin Dashboard</h3>
+            <p>Alpino is fully based on HTML5 + CSS3 Standards. Is fully responsive and clean on every device and every browser</p>                        
+            
         </div>
-        <div className="form-group">
-          <input type="email" 
-          placeholder="Email Address" 
-          value={email}
-          onChange={e => { onChange(e) } }
-          name="email" />
-          <small className="form-text"
-            >This site uses Gravatar so if you want a profile image, use a
-            Gravatar email</small>
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={e => { onChange(e) } }
-            value={password}
-           
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            onChange={e => { onChange(e) } }
-            value={password2}
+       </Col>
+       <Col lg={{ span:4, offset: 1 } } md={12} >
+       <Alert/>
+       <div className="card-plain">
+        <h2 className="large text-primary">Sign Up</h2>
+          <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
           
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
-      </form>
-      <p className="my-1">
-        Already have an account? <a href="/login">Sign In</a>
-      </p>
+          <form className="form" onSubmit={e => onSubmit(e) }>
+            <div className="form-group">
+              <input type="text" placeholder="Name" 
+              name="name" 
+              className="form-control"
+              value={name}
+              onChange={e => { onChange(e) } }
+                />
+            </div>
+            <div className="form-group">
+              <input type="email" 
+              className="form-control"
+              placeholder="Email Address" 
+              value={email}
+              onChange={e => { onChange(e) } }
+              name="email" />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                name="password"
+                onChange={e => { onChange(e) } }
+                value={password}
+              
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirm Password"
+                name="password2"
+                onChange={e => { onChange(e) } }
+                value={password2}
+              
+              />
+            </div>
+            <input type="submit" className="btn btn-primary" value="Register" />
+          </form>
+          <p className="mt-3">
+            Already have an account? <a href="/login">Sign In</a>
+          </p>
+      </div>
+      </Col>
      </Fragment>
     )
 };

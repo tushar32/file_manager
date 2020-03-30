@@ -1,11 +1,15 @@
 import React,{ Fragment,useState } from 'react';
 import { login } from '../../actions/auth';
+import Alert from './../layout/ui/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {  Redirect } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
  
 const Login = ({ login, isAuth }) => {
 
+  console.log('isAuth',isAuth);
+  
     const [formData, setFormData ] = useState({
        name: '',
        email: '',
@@ -13,7 +17,7 @@ const Login = ({ login, isAuth }) => {
        password2: '',
     });
 
-    const {email,password } = formData;
+    const { email,password } = formData;
 
     const onChange = e => setFormData({
       ...formData,
@@ -21,7 +25,6 @@ const Login = ({ login, isAuth }) => {
     })
 
     const onSubmit = e =>  {
-
        e.preventDefault();
         login({ email,password })
     }
@@ -32,31 +35,50 @@ const Login = ({ login, isAuth }) => {
     
    return (
      <Fragment>
-       <h1 className="large text-primary">Sign In</h1>
+       <Col lg={6} md={12}>
+       <div className="company_detail">
+            <h4 className="logo">Alpino</h4>
+            <h3>The ultimate <strong>Bootstrap 4</strong> Admin Dashboard</h3>
+            <p>Alpino is fully based on HTML5 + CSS3 Standards. Is fully responsive and clean on every device and every browser</p>                        
+            
+        </div>
+       </Col>
+       <Col lg={{ span:4, offset: 1 } } md={12} >
+         <div className="card-plain">
 
-      <form className="form" onSubmit={e => onSubmit(e) }>
-        <div className="form-group">
-          <input type="email" 
-          placeholder="Email Address" 
-          value={email}
-          onChange={e => { onChange(e) } }
-          name="email" />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={e => { onChange(e) } }
-            value={password}
-            minLength="6"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
-      <p className="my-1">
-        Don't have an account? <a href="/register">Sign Up</a>
-      </p>
+          <h2 className="large text-primary">Sign In</h2>
+     
+
+          <form className="form" onSubmit={e => onSubmit(e) }>
+            <div className="input-group">
+              <input type="email" 
+              className="form-control"
+              placeholder="Email Address" 
+              value={email}
+              onChange={e => { onChange(e) } }
+              name="email" />
+
+               <Alert name="email" />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                name="password"
+                onChange={e => { onChange(e) } }
+                value={password}
+                minLength="6"
+              />
+              <Alert name="password" />
+            </div>
+            <input type="submit" className="btn btn-primary btn-round btn-block" value="Login" />
+          </form>
+        <p className="my-1 mt-3">
+          Don't have an account? <a href="/register">Sign Up</a>
+        </p>
+      </div>
+      </Col>
      </Fragment>
     )
 }

@@ -1,13 +1,17 @@
 const express = require('express');
+const connectDB = require('./config/db');
 const fileUpload = require('./middleware/file-upload');
 
 const app = express();
 console.log(' Express Server connected')
 
+//connect database
+connectDB();
+
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-const auth = require('api/auth');
+const auth = require('./api/auth');
 
 app.use('/api/auth',auth);
 

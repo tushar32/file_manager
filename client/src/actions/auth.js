@@ -7,6 +7,8 @@ import {
     LOGOUT
  } from './types';
 import axios from 'axios';
+
+import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
 export const loadUser = () => async dispatch => {
@@ -41,9 +43,9 @@ export const register = ({ name,email,password }) => async dispatch => {
     }
 
     const body = JSON.stringify({ name,email,password });
-
+    
     try {
-        const res = await axios.post('/api/users', body, options)
+        const res = await axios.post('/api/auth/register', body, options)
 
         dispatch({
             type:REGISTER_SUCCESS,
@@ -56,7 +58,7 @@ export const register = ({ name,email,password }) => async dispatch => {
         const errors = error.response.data.errors;
 
         if(errors) {
-            //errors.forEach(error => dispatch(setAlert(error.msg,'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg,'danger')));
         }
         dispatch({
             type:REGISTER_FAIL,
@@ -74,7 +76,7 @@ export const login  = ({ email,password }) => async dispatch => {
     const body = JSON.stringify({ email,password });
 
     try {
-        const res = await axios.post('/api/auth/login', body, options)
+        const res = await axios.get('/api/auth/login', body, options)
 
         dispatch({
             type:LOGIN_SUCCESS,
@@ -86,7 +88,7 @@ export const login  = ({ email,password }) => async dispatch => {
         const errors = error.response.data.errors;
 
         if(errors) {
-          //  errors.forEach(error => dispatch(setAlert(error.msg,'danger')));
+            dispatch(setAlert(errors));
         }
 
         dispatch({
