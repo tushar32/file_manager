@@ -1,6 +1,6 @@
 import React, { Fragment ,useState } from 'react';
 import { Row,Col } from 'react-bootstrap';
-import Upload from './../upload/Upload';
+import Upload from '../Upload/Upload';
  
 const Images = () => {
 

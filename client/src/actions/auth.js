@@ -4,11 +4,11 @@ import {
     LOGIN_SUCCESS,
     USER_LOADED,
     AUTH_FAILED,
-    LOGOUT
+    LOGOUT,
+    SET_ALERT
  } from './types';
 import axios from 'axios';
 
-import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
 export const loadUser = () => async dispatch => {
@@ -47,6 +47,8 @@ export const register = ({ name,email,password }) => async dispatch => {
     try {
         const res = await axios.post('/api/auth/register', body, options)
 
+        console.log('res.data',res.data);
+        
         dispatch({
             type:REGISTER_SUCCESS,
             payload: res.data
@@ -58,7 +60,10 @@ export const register = ({ name,email,password }) => async dispatch => {
         const errors = error.response.data.errors;
 
         if(errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg,'danger')));
+            dispatch({
+                type: SET_ALERT,
+                payload: errors 
+            });
         }
         dispatch({
             type:REGISTER_FAIL,
@@ -86,9 +91,12 @@ export const login  = ({ email,password }) => async dispatch => {
         dispatch(loadUser());
     } catch (error) {
         const errors = error.response.data.errors;
-
+             
         if(errors) {
-            dispatch(setAlert(errors));
+            dispatch({
+                type: SET_ALERT,
+                payload: errors 
+            });
         }
 
         dispatch({

@@ -5,6 +5,7 @@ const { check,validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
+const auth = require('../middleware/auth');
 
 // @Route api/auth
 // @desc Login user
@@ -65,7 +66,7 @@ router.post('/register', [
   async (req,res) => {
       const errors = validationResult(req);
     if(!errors.isEmpty()){
-     return res.status(400).json({ errors: errors.array()});
+     return res.status(400).json({ errors: errors.mapped()});
     }
 
     const { name,email,password } = req.body;
@@ -73,7 +74,7 @@ router.post('/register', [
         let user = await User.findOne({ email })
 
         if(user){
-            return res.status(400).json({ errors: [{ msg: 'User already exist'}]})
+            return res.status(400).json({ errors: { "email" :{ msg: 'User already exist'}} })
         }
         
         user = new User({
@@ -106,6 +107,20 @@ router.post('/register', [
         res.status(500).send(err.message);
     }
  
+});
+
+
+//@route GET  api/auth
+router.get('/',auth,
+    async (req,res) => {
+        console.log('req.user',req.user);
+
+            try{
+                const user = await User.findById(req.user.id).select('-password');
+                res.json(user);
+            } catch {
+                res.status(500).json({msg:'fdf'});
+            }
 });
 
 module.exports = router;

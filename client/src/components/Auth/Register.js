@@ -33,7 +33,7 @@ const Register = ({ setAlert, register ,isAuth}) => {
 
       if(password !== password2){
         //call setAlert action to 
-        setAlert("password doesn't match",'danger');
+        setAlert({ 'password2': { "msg":"password doesn't match" } });
       } else {
         register({ name,email,password })
       }
@@ -50,7 +50,7 @@ const Register = ({ setAlert, register ,isAuth}) => {
         </div>
        </Col>
        <Col lg={{ span:4, offset: 1 } } md={12} >
-       <Alert/>
+       
        <div className="card-plain">
         <h2 className="large text-primary">Sign Up</h2>
           <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
@@ -63,6 +63,7 @@ const Register = ({ setAlert, register ,isAuth}) => {
               value={name}
               onChange={e => { onChange(e) } }
                 />
+              <Alert name="name" />
             </div>
             <div className="form-group">
               <input type="email" 
@@ -71,6 +72,8 @@ const Register = ({ setAlert, register ,isAuth}) => {
               value={email}
               onChange={e => { onChange(e) } }
               name="email" />
+              
+              <Alert name="email" />
             </div>
             <div className="form-group">
               <input
@@ -82,6 +85,7 @@ const Register = ({ setAlert, register ,isAuth}) => {
                 value={password}
               
               />
+              <Alert name="password" />
             </div>
             <div className="form-group">
               <input
@@ -92,9 +96,9 @@ const Register = ({ setAlert, register ,isAuth}) => {
                 onChange={e => { onChange(e) } }
                 value={password2}
               
-              />
+              /> <Alert name="password2" />
             </div>
-            <input type="submit" className="btn btn-primary" value="Register" />
+            <input type="submit" className="btn btn-primary btn-block btn-rounded" value="Register" />
           </form>
           <p className="mt-3">
             Already have an account? <a href="/login">Sign In</a>

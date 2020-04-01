@@ -1,14 +1,25 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route,Switch ,Redirect}  from 'react-router-dom';
 import './scss/style.scss';
 import Routes from './components/routes/Routes';
+import { loadUser } from './actions/auth'
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
+import setAuthToken from './utils/setAuthToken';
+
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
+
  export default function App(){
- 
+
+  useEffect( () => {
+    store.dispatch(loadUser())
+  },[]);
+
   return(    
 
     <Provider store={store}>

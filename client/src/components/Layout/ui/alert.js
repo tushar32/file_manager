@@ -8,14 +8,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const Alert = (props) => {
- 
   
-  const  { alerts }   = props.alerts;
+  const  { alerts }   = props;
   const name = props.name;
 
-  return alerts[name] ? (
-    
-      <div class="alert alert-dander"> Alert </div>
+  console.log(alerts);
+  
+  return name in alerts ? (
+      
+      <span class="invalid-feedback" style={{ "display": "block" }}> { alerts[name].msg } </span>
   
   ) :'' ;
   

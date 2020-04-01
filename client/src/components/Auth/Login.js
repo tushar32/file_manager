@@ -72,7 +72,7 @@ const Login = ({ login, isAuth }) => {
               />
               <Alert name="password" />
             </div>
-            <input type="submit" className="btn btn-primary btn-round btn-block" value="Login" />
+            <input type="submit" className="btn btn-primary btn-rounded btn-block" value="Login" />
           </form>
         <p className="my-1 mt-3">
           Don't have an account? <a href="/register">Sign Up</a>
