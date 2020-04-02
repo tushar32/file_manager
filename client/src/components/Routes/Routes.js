@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Dashboard from '../dashboard/Dashboard';
-import Images from '../images/Images';
+import Dashboard from '../Dashboard/Dashboard';
+import Images from '../Images/Images';
 import Login from '../Auth/Login';
 import Register from '../Auth/Register';
 import PrivateRoute from './PrivateRoute';

@@ -1,6 +1,6 @@
 import React,{ Fragment,useState } from 'react';
 import { login } from '../../actions/auth';
-import Alert from './../layout/ui/alert';
+import Alert from '../Layout/Ui/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {  Redirect } from 'react-router-dom';
@@ -11,10 +11,8 @@ const Login = ({ login, isAuth }) => {
   console.log('isAuth',isAuth);
   
     const [formData, setFormData ] = useState({
-       name: '',
        email: '',
-       password: '',
-       password2: '',
+       password: ''
     });
 
     const { email,password } = formData;

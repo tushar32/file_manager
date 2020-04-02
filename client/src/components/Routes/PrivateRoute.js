@@ -2,12 +2,14 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AdminLayout from './../layout/Admin/AdminLayout';
+import AdminLayout from './../Layout/Admin/AdminLayout';
 
-const PrivateRoute = ({ component: Component,auth: { isAuth, loading },...rest }) => (
-  <Route {...rest}
+const PrivateRoute = ({ component: Component,auth: { token },...rest }) => (
+  
+    <Route {...rest}
     render={ props =>
-      !isAuth && !loading ? (  <Redirect to='/login' />) : ( 
+     
+      !token ? (  <Redirect to='/login' />) : ( 
           <div>
             <AdminLayout>
                 <Component {...props} />

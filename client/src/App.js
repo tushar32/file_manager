@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route,Switch ,Redirect}  from 'react-router-dom';
+import { BrowserRouter as Router, Route,Switch }  from 'react-router-dom';
 import './scss/style.scss';
-import Routes from './components/routes/Routes';
+import Routes from './components/Routes/Routes';
 import { loadUser } from './actions/auth'
 
 //Redux

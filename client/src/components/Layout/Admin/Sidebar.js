@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import FolderContainer from '../../../containers/FolderContainer/FolderContainer';
  
 const Sidebar = () => {
+
    return (
       <div>
           <aside>
@@ -9,17 +11,13 @@ const Sidebar = () => {
         <div className="menu">
             <ul className="list">
                 <li>
-                    <div className="user-info m-b-20"> bg tg 
+                    <div className="user-info text-center m-b-20">
                         <div className="image">
-                            <a href="profile.html"><img src="assets/images/profile_av.jpg" alt= "User"/></a>
+                            <a href="profile.html"><img src={ require("./../../../assets/images/profile_av.jpg") } alt= "User"/></a>
                         </div>
                         <div className="detail">
-                            <h6>Michael</h6>
+                            <h4>Michael</h4>
                             <p className="m-b-0">info@example.com</p>
-                            <a href="javascript:void(0);" title="" className=" waves-effect waves-block"><i className="zmdi zmdi-facebook-box"></i></a>
-                            <a href="javascript:void(0);" title="" className=" waves-effect waves-block"><i className="zmdi zmdi-linkedin-box"></i></a>
-                            <a href="javascript:void(0);" title="" className=" waves-effect waves-block"><i className="zmdi zmdi-instagram"></i></a>
-                            <a href="javascript:void(0);" title="" className=" waves-effect waves-block"><i className="zmdi zmdi-twitter-box"></i></a>                            
                         </div>
                     </div>
                 </li>
@@ -29,6 +27,8 @@ const Sidebar = () => {
                     </Button>
                 </li>
                 <li className="header"><i className="fa fa-file"></i>  Files </li>
+
+                <FolderContainer />
                 
                
             </ul>

@@ -1,7 +1,13 @@
-#wrapper{
+@import url("https://fonts.googleapis.com/css?family=Muli:300,400,600,700");@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url(https://fonts.gstatic.com/s/materialicons/v19/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format("woff2")}#wrapper{
     width: 100%;
     overflow: hidden;
 }
+body{
+  font-family:'Muli', Arial, Tahoma, sans-serif;
+  font-weight:400;
+  font-size:15px;
+}
+
 img{
   max-width: 100%;
 }
@@ -30,6 +36,16 @@ img{
             }
         }
     }
+    .menu {
+      .list{
+        a{
+          color:#313740;
+          position:relative;
+          padding:15px;
+          display: block;
+        }
+      }
+    }
     ul{
         list-style:none;
     
@@ -42,7 +58,7 @@ img{
             padding: 20px 0;
         }
         li.header{
-          font-size: 12px;
+          font-size: 14px;
           font-weight: 700;
           padding: 8px 0;
           position: relative;

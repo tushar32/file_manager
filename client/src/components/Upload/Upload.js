@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Dropzone from '../dropzone/Dropzone';
 import { Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -13,7 +12,6 @@ class Upload extends Component {
     }
     this.fileInputRef = React.createRef();
   }
-
 
   onFilesAdded = e => {
     e.preventDefault();

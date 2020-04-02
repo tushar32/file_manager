@@ -10,13 +10,15 @@ const auth = require('../middleware/auth');
 // @Route api/auth
 // @desc Login user
 
-router.get('/login',[
+router.post('/login',[
     check('email','Please enter a valid email').isEmail(),
     // password must be at least 5 chars long
     check('password','Please enter a password').exists()
 ],async (req, res) => {
     const errors = validationResult(req);
 
+    console.log(req.body);
+    
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.mapped()});
     }
@@ -65,6 +67,7 @@ router.post('/register', [
   ], 
   async (req,res) => {
       const errors = validationResult(req);
+      console.log(req.body);
     if(!errors.isEmpty()){
      return res.status(400).json({ errors: errors.mapped()});
     }

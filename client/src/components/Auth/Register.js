@@ -2,7 +2,7 @@ import React,{ Fragment,useState } from 'react';
 import { connect } from 'react-redux';
 // call action type (setAlert) from component and use where you want to call that action
 import { setAlert } from '../../actions/alert';
-import Alert from './../layout/ui/alert';
+import Alert from './../Layout/Ui/alert';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
