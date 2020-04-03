@@ -14,17 +14,42 @@ const FolderContainer = () => {
     {
         id: 100,
         text: 'Images',
+        isLeaf: false,
         children: [
             {
                 id: 101,
                 text: 'Satsang',
-                isLeaf: true,
-                children: []
+                isLeaf: false,
+                parent_node:100,
+                children: [
+                {
+                    id: 102,
+                    text: 'Vedas',
+                    isLeaf: true,
+                    parent_node:101,
+                    children : []
+                }
+                ]
             },
             {
                 id: 102,
                 text: 'Mafinama',
-                isLeaf: true,  
+                isLeaf: true, 
+                parent_node:100,
+                children: []
+            }
+        ],
+        
+    },{
+        id: 106,
+        text: 'Documents',
+        isLeaf: false,
+        children: [
+            {
+                id: 107,
+                text: 'Kabir Vani',
+                isLeaf: true, 
+                parent_node:106,
                 children: []
             }
         ]
@@ -33,7 +58,9 @@ const FolderContainer = () => {
 
    return (
       <Fragment>
-          <TreeView treeArray={ treeArray } /> 
+          <li>
+            <TreeView treeArray={ treeArray } /> 
+          </li>
       </Fragment>
     )
 }
