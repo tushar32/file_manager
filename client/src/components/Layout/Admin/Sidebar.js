@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import FolderContainer from '../../../containers/FolderContainer/FolderContainer';
+import NodeTreeContainer from '../../../containers/NodeTreeContainer/NodeTreeContainer';
  
 const Sidebar = () => {
 
@@ -29,7 +29,7 @@ const Sidebar = () => {
                 </li>
                 <li className="header"><i className="fa fa-file"></i>  Files </li>
 
-                <FolderContainer />
+                <NodeTreeContainer />
                 
                
             </ul>

@@ -23,7 +23,7 @@ const TreeList = ({ treeItem }) => {
    return (
      <Fragment>
       <li className={classes.TreeItem} key={ treeItem.id } >
-         <i className="fa fa-folder"></i> 
+        
           { 
             expand  ? (
 
@@ -54,7 +54,13 @@ const TreeList = ({ treeItem }) => {
             ) : ''
           }
             
-           <span className={ classes.FolderName }> { treeItem.text } </span>
+           <div  className={ classes.Folder } >
+            <i className="fa fa-folder" style={{ color: '#890606' }}></i> 
+            
+                <span  className={ classes.FolderName}> { treeItem.name } </span>  
+             
+           
+             </div>
 
           <ul className={ classes.TreeChildren} style={{ "display" : showChildren }}>
               { treeChildren }

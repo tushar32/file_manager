@@ -3,6 +3,8 @@ import TreeList from './../TreeList/TreeList';
 import classes from './../TreeList/TreeList.module.css';
 
 const TreeView = (props) => {
+  console.log(props.treeArray);
+  
     const treeItems  = props.treeArray;
 
 return (

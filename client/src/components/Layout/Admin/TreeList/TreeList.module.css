@@ -1,28 +1,35 @@
 .TreeItem{
     margin: 10px 0 0 0;
+    font-size: 18px;
 }
+.TreeItem .Folder{
+    padding-left: 7px;
+    cursor: pointer;
+  }
+
 .TreeItem .FolderName{
     padding-left: 2px;
-  }
+    cursor: pointer;
+}
   
 .TreeItem > button {
-    color:#0062cc;
+    color: #313740;
     position: absolute;
     cursor: pointer;
     float: left;
     width: 25px;
-    height: 30px;
+    height: 35px;
     padding: 0;
     white-space: nowrap;
     overflow: hidden;
     border: 0;
     background: transparent;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1;
     text-align: center;
     font-weight: 700;
     left: -23px;
-    top:-12px
+    top:-14px
 }
 .TreeItem > button::before{
   content: "+";
