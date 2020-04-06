@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component,auth: { token },...rest }) => (
   
     <Route {...rest}
     render={ props =>
-     
+     !token ? <Redirect to="/login" /> :
        ( 
           <div>
             <AdminLayout>

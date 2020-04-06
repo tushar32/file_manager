@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import TreeList from './../TreeList/TreeList';
+import classes from './../TreeList/TreeList.module.css';
 
 const TreeView = (props) => {
     const treeItems  = props.treeArray;
@@ -9,7 +10,9 @@ return (
     {
       treeItems.map(treeItem => {
         return (
-          <TreeList key={treeItem.id} treeItem={ treeItem } />
+          <ul className={ classes.TreeList }>
+            <TreeList key={treeItem.id} treeItem={ treeItem } />
+          </ul>
         )
       })
     }

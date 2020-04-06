@@ -19,12 +19,13 @@ const Sidebar = () => {
                             <h4>Michael</h4>
                             <p className="m-b-0">info@example.com</p>
                         </div>
+                        <Button variant="primary" className="btn m-b-0">
+                            <i className="fa fa-sign-out-alt"></i> Logout
+                        </Button>
                     </div>
                 </li>
                 <li className="upload">
-                    <Button variant="primary" className="btn">
-                        <i className="fa fa-plus"></i> Create New
-                    </Button>
+                   
                 </li>
                 <li className="header"><i className="fa fa-file"></i>  Files </li>
 

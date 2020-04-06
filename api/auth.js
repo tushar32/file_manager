@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
+const multer = require('multer') ; 
+const { rootNodes }= require('./../config/config');
 
 // @Route api/auth
 // @desc Login user
@@ -90,7 +92,16 @@ router.post('/register', [
         user.password = await bcrypt.hash(password,salt);
 
         await user.save();
-        
+
+        rootNodes.map(rootNode => {
+            multer({ storage : 
+              multer.diskStorage({
+              destination: 'client/public/uploads/'+user.name+'_'+user.id+'/'+rootNode
+            })
+         })
+        });
+      
+
         const payload = {
             user: {
                 id: user.id
