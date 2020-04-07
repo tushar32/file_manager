@@ -1,15 +1,17 @@
 
 const readdirp = require("readdirp");
 const path = require('path');
-const { rootNodes }= require('./../../config/config');
+const { rootNodes, fileExtensions }= require('./../../config/config');
 var uuid = require('uuid');
 const { addToStructure, getRootNodes } = require('./helpers');
 
-
-exports.getStreams = async function( user, node = ''){ // node = ''  is a root
+exports.getStreams = async function( user, node = ''){ // default node = ''  is a root
 
     const appPath =  path.resolve(process.cwd());
     const folderPath = appPath+"/client/public/uploads/"+user.name.replace(" ","_")+'_'+user.id+'/'+node;
+
+    console.log(folderPath);
+    
     const settings = {
         // Filter files with js and json extension
         type: 'directories',
@@ -18,10 +20,11 @@ exports.getStreams = async function( user, node = ''){ // node = ''  is a root
     };
 
     const rootDirArr  = getRootNodes();
-    console.log('rootDirArr',rootDirArr);
+   // console.log('rootDirArr',rootDirArr);
     
     // Iterate recursively through a folder
    const streams = await readdirp.promise(folderPath,settings);
+   //  console.log('streams',streams);
      
      streams.map(file => {
 
@@ -34,7 +37,7 @@ exports.getStreams = async function( user, node = ''){ // node = ''  is a root
 
           const pos =  rootDirArr.findIndex(i => i.name === root); 
         //  console.log('children',children);
-          console.log('parentLeafChild',parentLeafChild);
+          //console.log('parentLeafChild',parentLeafChild);
           /*
             This condition checks that if parentLeafChild is root only then 
             directly push child nodes to its children array
@@ -68,8 +71,49 @@ exports.getStreams = async function( user, node = ''){ // node = ''  is a root
         }
     });
 
-    
     return rootDirArr
+}
 
+exports.getChildrenStreams = async function (user , nodePath){
+  const appPath =  path.resolve(process.cwd());
+  const folderPath = appPath+"/client/public/uploads/"+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath;
 
+  const root = nodePath.split('/').shift();
+  
+  const settings = {
+      // Filter files with js and json extension
+      type: 'files_directories',
+      //depth at which to stop recursing even if more subdirectories are found
+      depth : 0
+  };
+
+  const filesFolders  = {root:root , files : [] , folders : [] };
+  console.log('filesFolders',filesFolders.files);
+  
+  // Iterate recursively through a folder
+ const streams = await readdirp.promise(folderPath,settings);
+   
+   streams.map(file => {
+     const fileExt = file.basename.split('.').pop();
+   
+    if(fileExtensions.includes(fileExt)){
+      filesFolders.files.push({
+        name: file.basename,
+        id: uuid.v4(),
+        folderPath : folderPath,
+        filePath : '/uploads/'+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath+"/"+file.basename,
+        type : 'file'
+      })
+    } else {
+      filesFolders.folders.push({
+        name: file.basename,
+        id: uuid.v4(),
+        path : file.path,
+        type : 'folders'
+      })
+    }
+  });
+
+  
+  return filesFolders
 }

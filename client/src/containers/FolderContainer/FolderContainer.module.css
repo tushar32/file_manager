@@ -1,0 +1,9 @@
+
+.Card {
+ transition:.5s;
+ border:0;
+ position:relative;
+ width:100%;
+ background:transparent;
+ border-radius:.55rem
+}

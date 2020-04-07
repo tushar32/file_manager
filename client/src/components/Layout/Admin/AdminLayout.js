@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
  
-const AdminLayout = ({ props, ...rest}) => {
-   return (
-      <div>
-        <Sidebar />
-        <section class="content file_manager">    
-            <div class="container-fluid">
-             <Header />
-              { props }
+const AdminLayout = ({ children }) => 
+  
+    <Fragment>
+      <Sidebar />
+      <section class="content file_manager">    
+          <div class="container-fluid">
+            <Header />
+            <div className="content">
+            { children }
             </div>
-        </section>
-      </div>
-    )
-}
- 
+          </div>
+      </section>
+    </Fragment>
+
 export default AdminLayout

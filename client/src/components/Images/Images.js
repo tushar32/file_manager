@@ -1,24 +1,41 @@
-import React, { Fragment ,useState } from 'react';
-import { Row,Col } from 'react-bootstrap';
-import Upload from '../Upload/Upload';
+import React, { Fragment  } from 'react';
  
-const Images = () => {
+const Images = (props) => {
+  console.log('sfsdfsd');
+  
+   const { nodeTreeFiles }  = props;
 
    return (
-      <Fragment>
-        <Row className="label-bar">
-          <Col className="text-center">
-            <Upload />
-          </Col>
-        </Row>
-
-        <Row>
-          <div className="">
-             
+    <Fragment>
+     
+      {
+       nodeTreeFiles.files.map(file => {
+         return (
+            <div className="col-lg-3 col-md-4 col-sm-12" key={file.id}>
+              <div className="card">
+                  <div className="file">
+                      <div className="hover">
+                          <button type="button" className="btn btn-icon btn-icon-mini btn-round btn-danger">
+                              <i className="fas fa-delete"></i>
+                          </button>
+                      </div>
+                      <div className="image">
+                          <img src={ file.filePath } alt="img" className="img-fluid" />
+                      </div>
+                      <div className="file-name">
+                          <p className="m-b-5 text-muted">{ file.name}</p>
+                          <small>Size: 2MB <span className="date text-muted">Dec 11, 2017</span></small>
+                      </div>
+                  </div>
+              </div>
           </div>
-        </Row>
+         )
+        })
+        
+      }
       </Fragment>
-    )
-}
+       )  
+    
+};
  
 export default Images

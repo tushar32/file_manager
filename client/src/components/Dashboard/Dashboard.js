@@ -1,10 +1,11 @@
-import React from 'react';
- 
+import React, { Fragment } from 'react';
+import FolderContainer from './../../containers/FolderContainer/FolderContainer' ;
+
 const Dashboard = () => {
    return (
-      <div>
-        Dashboard
-      </div>
+      <Fragment>
+        <FolderContainer />
+      </Fragment>
     )
 }
  

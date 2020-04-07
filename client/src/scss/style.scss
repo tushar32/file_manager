@@ -6,6 +6,7 @@ body{
   font-family:'Muli', Arial, Tahoma, sans-serif;
   font-weight:400;
   font-size:15px;
+  background-color: #f4f7f6;
 }
 
 img{
@@ -24,7 +25,7 @@ img{
     width:250px;
     position: fixed;
     .user-info {
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #bbb5b5;
         color: #424242;
         .image {
             img {
@@ -100,10 +101,25 @@ section.content {
 .main-content{
     margin : 0 0 0 280px;
 }
-.btn{
+.btn-primary{
     font-size: 14px;
-    background-color: #6a5acd;
+    background-color: #9744be;
+    border-color: #a134d4
 }
+.btn-outline-primary{
+  background-color: transparent;
+  color: #a134d4;
+  border-color: #a134d4
+}
+.btn-primary:hover , .btn-outline-primary:hover{
+  background-color: #9744be;
+  border-color: #a134d4
+}
+.btn-primary:focus , .btn-outline-primary:focus{
+  background-color: #9744be;
+  border-color: #a134d4
+}
+
  /* Upload css */
 .Upload {
     display: flex;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
-const PrivateRoute = ({ component: Component,auth: { isAuth, loading },...rest }) => (
+const SessionRoute = ({ component: Component,auth: { isAuth, loading },...rest }) => (
   <Route {...rest}
     render={ props =>
       !isAuth && !loading ? (  <Redirect to='/login' />) : ( 
@@ -23,7 +23,7 @@ const PrivateRoute = ({ component: Component,auth: { isAuth, loading },...rest }
   />
 );
 
-PrivateRoute.propTypes = {
+SessionRoute.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
   auth: state.register
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(SessionRoute);

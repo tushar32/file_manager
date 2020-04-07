@@ -19,7 +19,7 @@ const Sidebar = () => {
                             <h4>Michael</h4>
                             <p className="m-b-0">info@example.com</p>
                         </div>
-                        <Button variant="primary" className="btn m-b-0">
+                        <Button variant="primary" className="btn mb-3">
                             <i className="fa fa-sign-out-alt"></i> Logout
                         </Button>
                     </div>

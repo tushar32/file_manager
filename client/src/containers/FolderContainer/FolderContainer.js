@@ -1,41 +1,45 @@
-import React,{ Fragment, useEffect } from 'react';
+import React,{ Fragment } from 'react';
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import TreeView from './../../components/Layout/Admin/TreeView/TreeView';
-import { getNodeTree } from './../../actions/nodeStructure';
+import Images from './../../components/Images/Images';
+import Actions from './../../components/Upload/Actions';
 
-const FolderContainer = ({  nodeStructure : { nodeTree, loading } , getNodeTree  }) => {
+const FolderContainer = ({  files : { nodeTreeFiles, loading }   }) => {
 
-    useEffect(() => {
-        console.log('dsdsd');
+    let fileComponent = null;
+    
+    if(nodeTreeFiles) {
+        switch(nodeTreeFiles.root){
+
+            case 'images':
+                fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } />
+                break;
+            default:
+                fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } />
+                break;
+        }
+    }
         
-        getNodeTree()
-    },[getNodeTree])
+    
 
-console.log('nodeTree',nodeTree);
-console.log('loading',loading);
-
-
-return loading && nodeTree === null ?  (
+return loading && nodeTreeFiles === null ?  (
     <div> loading</div>
 ) : (
-      <Fragment>
-        
-          <li>
-            <TreeView treeArray = { nodeTree } />
-          </li>
-      </Fragment>
-    )
+    <Fragment>
+         <Actions type="images" />
+       { fileComponent }
+       </Fragment>
+    )   
+    
 }
 
 FolderContainer.propTypes = {
-    getNodeTree : PropTypes.func.isRequired,
-    nodeStructure: PropTypes.object.isRequired
+    files: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    nodeStructure: state.nodeStructure
+    files: state.files
 });
  
-export default connect(mapStateToProps,{ getNodeTree }) (withRouter(FolderContainer));
+export default connect(mapStateToProps) (withRouter(FolderContainer));

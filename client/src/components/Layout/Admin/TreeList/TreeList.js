@@ -1,5 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import classes from './TreeList.module.css';
+import { getFiles } from './../../../../actions/nodeStructure';
+import store from './../../../../store';
  
 const TreeList = ({ treeItem }) => {
 
@@ -18,6 +20,12 @@ const TreeList = ({ treeItem }) => {
     const handleToggleChildren = (e,display) => {
       
       setShowChildren(display)
+    };
+
+    const handleGetFiles = (e, path) => {
+      console.log('path',path);
+      
+      store.dispatch(getFiles(path))
     };
 
    return (
@@ -42,7 +50,7 @@ const TreeList = ({ treeItem }) => {
             treeItem.children.length > 0  ? (
 
               <button data-action="expand"
-                onClick={(e) => { setExpand(true) ;handleToggleChildren(e,'') } }>
+                onClick={(e) => { setExpand(true);handleToggleChildren(e,'') } }>
               </button> 
             // <Button data-action="Expand"
             //     click1={ handleToggleChildren } click2={ handleExpand } 
@@ -54,10 +62,10 @@ const TreeList = ({ treeItem }) => {
             ) : ''
           }
             
-           <div  className={ classes.Folder } >
+           <div  className={ classes.Folder } onClick={ (e) => handleGetFiles(e, treeItem.path )}>
             <i className="fa fa-folder" style={{ color: '#890606' }}></i> 
             
-                <span  className={ classes.FolderName}> { treeItem.name } </span>  
+                <span  className={ classes.FolderName} > { treeItem.name } </span>  
              
            
              </div>
