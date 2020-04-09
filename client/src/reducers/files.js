@@ -1,5 +1,6 @@
 import {
-    IMAGE_FILES
+    IMAGE_FILES,
+    UPLOAD
 } from '../actions/types';
 
 const initialState = {
@@ -18,6 +19,10 @@ const initialState = {
                 error:'',
                 loading: false
             }
+        case UPLOAD:
+        return {
+            ...state
+        }
         
         default:
             return state;  

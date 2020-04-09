@@ -8,6 +8,13 @@ body{
   font-size:15px;
   background-color: #f4f7f6;
 }
+.card {
+  transition: .5s;
+  border: 0;
+  position: relative;
+  width: 100%;
+  border-radius: .55rem;
+}
 
 img{
   max-width: 100%;
@@ -86,7 +93,7 @@ section.content {
     background-color: #f4f7f6;
     padding:15px 0;
     border-radius: 5px;
-    .file{
+    .file {
       cursor: pointer;
     }
     input{
@@ -106,7 +113,7 @@ section.content {
     background-color: #9744be;
     border-color: #a134d4
 }
-.btn-outline-primary{
+.btn-outline-primary {
   background-color: transparent;
   color: #a134d4;
   border-color: #a134d4
@@ -115,7 +122,7 @@ section.content {
   background-color: #9744be;
   border-color: #a134d4
 }
-.btn-primary:focus , .btn-outline-primary:focus{
+.btn-primary:focus , .btn-outline-primary:focus .btn-primary:active .btn-primary.active{
   background-color: #9744be;
   border-color: #a134d4
 }
@@ -128,7 +135,18 @@ section.content {
     align-items: center;
     text-align: left;
     overflow: hidden;
-  
+    background-color:#eee;
+
+   .body{
+      font-size: 14px;
+      padding: 20px;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+      border-radius: .55rem;
+      background: #fff;
+      color: #616161;
+      font-weight: 400;
+      transition: all 0.2s ease-in-out;
+   }
   
   .Content {
     display: flex;
@@ -140,7 +158,6 @@ section.content {
   }
   
   .Files {
-    margin-left: 32px;
     justify-content: flex-start;
     flex: 1;
     display: flex;
@@ -237,11 +254,10 @@ section.content {
   width: 100%;
   align-items: center;
   flex-direction: column;
-  margin: 32px 0;
+  margin: 15px 0 0  0;
 }
 
 .Dropzone {
-    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -369,4 +385,15 @@ section.content {
 
 .btn-rounded{
   border-radius: 30px !important
+}
+
+.file-manager{
+  .card {
+    transition: .5s;
+    border: 0;
+    position: relative;
+    width: 100%;
+    background: transparent;
+    border-radius: .55rem;
+  }
 }

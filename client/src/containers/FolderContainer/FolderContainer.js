@@ -1,4 +1,4 @@
-import React,{ Fragment } from 'react';
+import React,{ Fragment, useState } from 'react';
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,11 +9,14 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading }   }) => {
 
     let fileComponent = null;
     
+    const [ dropzone, setDropzone ] = useState(false);
+    console.log('dropzone', dropzone);
+
     if(nodeTreeFiles) {
         switch(nodeTreeFiles.root){
 
             case 'images':
-                fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } />
+                fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } dropzone={ dropzone } />
                 break;
             default:
                 fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } />
@@ -21,15 +24,16 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading }   }) => {
         }
     }
         
+   
+  
     
-
 return loading && nodeTreeFiles === null ?  (
     <div> loading</div>
 ) : (
-    <Fragment>
-         <Actions type="images" />
-       { fileComponent }
-       </Fragment>
+        <Fragment>
+            <Actions type="images" click= { () =>  { setDropzone(!dropzone) } } />
+            { fileComponent }
+        </Fragment>
     )   
     
 }

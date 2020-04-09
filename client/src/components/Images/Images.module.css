@@ -1,0 +1,36 @@
+
+.file .image,  .file .icon{
+    height:130px;
+ overflow:hidden;
+ background-size:cover;
+ background-position:top
+}
+
+ .file .hover {
+    position:absolute;
+    right:10px;
+    top:10px;
+    display:none;
+    transition:all 0.2s ease-in-out
+   }
+    .file a:hover .hover {
+    transition:all 0.2s ease-in-out
+   }
+    .file .icon {
+    padding:15px 10px;
+    display:table;
+    width:100%
+   }
+    .file .icon i {
+    display:table-cell;
+    font-size:30px;
+    vertical-align:middle;
+    color:#757575
+   }
+    .file .file_name {
+    padding:10px;
+    border-top:1px solid #eceff1
+   }
+    .file .file_name small .date {
+    float:right
+   }

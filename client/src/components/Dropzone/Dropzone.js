@@ -30,9 +30,7 @@ class Dropzone  extends Component {
     render() {
         return (
             
-            <div className={ `Dropzone  ${ this.state.highlight ? 'Highlight' :''}`}  
-              
-            >               
+            <div className={ `Dropzone  ${ this.state.highlight ? 'Highlight' :''}`}>               
                 <img
                     alt="upload"
                     className="Icon"

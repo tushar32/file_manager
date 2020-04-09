@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import cx from './Actions.module.css';
 import { Button } from 'react-bootstrap';
  
-const Actions = () => {
+const Actions = (props) => {
    return (
-    <div className={ cx.Card }>
-    <div className={ cx.Body }>
-       
-                <Button variant="outline-primary">
-                    <i className="fas fa-upload"></i> Upload
-                </Button> {' '}
-            
-                <Button variant="outline-primary">New Folder</Button>
-             
-    </div>
-<div></div></div>
+       <Fragment>
+            <div className={ cx.Card }>
+                <div className={ cx.Body }>
+                
+                    <Button variant="outline-primary mr-1" onClick={ props.click }>
+                        <i className="fas fa-upload"></i> Upload
+                    </Button> {' '}
+                
+                    <Button variant="outline-primary">New Folder</Button>
+                        
+                </div>
+            </div>
+    </Fragment>
     )
 }
  

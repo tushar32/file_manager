@@ -3,10 +3,11 @@ const multer = require('multer') ;
 // this is important because later we'll need to access file path
 
 const storage = multer.diskStorage({
-    destination: 'client/public/uploads',
+    destination:  function (req, file, cb) {
+      console.log('store',file);
+      cb(null,'client/public/uploads/'+ req.path)
+    },
     filename: function (req, file, cb) {
-        console.log('file',file);
-        
       cb(null, `${file.originalname}`);
     },
 });
