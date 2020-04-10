@@ -7,3 +7,14 @@
  background:transparent;
  border-radius:.55rem
 }
+
+.folder_icon{
+    background-color: transparent;
+}
+.folder_icon:hover{
+    opacity: 0.7;
+}
+
+.folder_name{
+
+}

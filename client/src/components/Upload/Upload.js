@@ -50,17 +50,19 @@ class Upload extends Component {
       alert(files)
   }
 
-  uploadFiles = (e) => {
-     e.preventDefault();
+  uploadFiles = async (e) => {
+        e.stopPropagation();
      let data = new FormData();
+     data.append('path', this.props.path);
      // for data can't be visible in console log
      this.state.files.forEach(file => {
       data.append('file', file);
       data.append('name', file.name);
-      data.append('path', this.props.path);
+     
      })
 
      this.props.upload(data);
+ 
   }
 
   removeFile = (e,fileIndex) => {

@@ -11,6 +11,9 @@ connectDB();
 
 global.__basedir = path.resolve(__dirname);
 
+app.use('/uploads/images', express.static(path.join('client','uploads','Tushar_barate_5e88192e145e2b1ead5c9fa0','images')));
+
+
 // Init Middleware
 app.use(express.json({ extended: false }));
 

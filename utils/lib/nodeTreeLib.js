@@ -87,7 +87,7 @@ exports.getChildrenStreams = async function (user , nodePath){
       depth : 0
   };
 
-  const filesFolders  = {root:root , path: user.name.replace(" ","_")+'_'+user.id+'/'+nodePath ,files : [] , folders : [] };
+  const filesFolders  = {root:root , current_path: nodePath, path: user.name.replace(" ","_")+'_'+user.id+'/'+nodePath ,files : [] , folders : [] };
   console.log('filesFolders',filesFolders.files);
   
   // Iterate recursively through a folder

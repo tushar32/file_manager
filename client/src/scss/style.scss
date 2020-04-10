@@ -397,3 +397,34 @@ section.content {
     border-radius: .55rem;
   }
 }
+
+// file icon css
+.file{
+  position: relative;
+  border-radius: .55rem;  
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+
+    .icon{
+    height:130px;
+    overflow:hidden;
+    background-size:cover;
+    background-position:top
+    }
+
+  .hover {
+    position:absolute;
+    right:10px;
+    top:10px;
+    display:none;
+    transition:all 0.2s ease-in-out
+    }
+  }
+  .file:hover{
+    opacity: 0.8;
+  }
+.file:hover .hover {
+  display:block;
+  transition:all 0.2s ease-in-out
+}

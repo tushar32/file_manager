@@ -30,3 +30,60 @@ export const getFiles = (path) => async dispatch => {
         
     }
 };
+
+export const deleteFile = ({ file_name,current_path, path }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ file_name, path })
+    try {
+        await axios.post('/api/node-tree/delete',data,options);
+
+        dispatch(getFiles(current_path));
+            
+    } catch (error) {
+        
+    }
+};
+
+export const createFolder = ({ file_name,current_path, path }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ file_name, path })
+    try {
+        await axios.post('/api/node-tree/create-folder',data,options);
+
+        dispatch(getFiles(current_path));
+            
+    } catch (error) {
+        
+    }
+};
+
+export const renameFolder = ({ folder_name,current_path, path }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ folder_name, path })
+    try {
+        await axios.post('/api/node-tree/rename-folder',data,options);
+
+        dispatch(getFiles(current_path));
+            
+    } catch (error) {
+        
+    }
+};
+
+
+

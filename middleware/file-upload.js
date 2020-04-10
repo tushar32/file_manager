@@ -3,15 +3,15 @@ const multer = require('multer') ;
 // this is important because later we'll need to access file path
 
 const storage = multer.diskStorage({
-    destination:  function (req, file, cb) {
-      console.log('store',file);
-      cb(null,'client/public/uploads/'+ req.path)
+
+    destination:  (req, file, cb) => {      
+      cb(null,'client/public/uploads/'+ req.body.path);
     },
     filename: function (req, file, cb) {
       cb(null, `${file.originalname}`);
     },
 });
 
-fileUploads = multer({ storage : storage })
+const fileUploads = multer({ storage : storage }).array('file')
 
 module.exports = fileUploads;
