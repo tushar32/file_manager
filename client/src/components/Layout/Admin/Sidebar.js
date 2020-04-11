@@ -1,8 +1,16 @@
 import React from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Button } from 'react-bootstrap';
 import NodeTreeContainer from '../../../containers/NodeTreeContainer/NodeTreeContainer';
+import { logout } from './../../../actions/auth';
+
  
-const Sidebar = () => {
+const Sidebar = ({ logout, auth : { isAuth, user } }) => {
+
+     const handleLogout = () => {
+         logout();
+     }
 
    return (
       <div>
@@ -16,10 +24,10 @@ const Sidebar = () => {
                             <a href="profile.html"><img src={ require("./../../../assets/images/profile_av.jpg") } alt= "User"/></a>
                         </div>
                         <div className="detail">
-                            <h4>Michael</h4>
-                            <p className="m-b-0">info@example.com</p>
+                            <h4>{ user ? user.name : '' }</h4>
+                            <p className="m-b-0">{ user ? user.email : '' }</p>
                         </div>
-                        <Button variant="primary" className="btn mb-3">
+                        <Button variant="primary" className="btn mb-3" key="logout" onClick={  handleLogout }>
                             <i className="fa fa-sign-out-alt"></i> Logout
                         </Button>
                     </div>
@@ -39,5 +47,15 @@ const Sidebar = () => {
       </div>
     )
 }
+
+Sidebar.propTypes = {
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
+
+} 
  
-export default Sidebar
+const mapStateToProps = state => ({
+    auth: state.register
+});
+
+export default connect(mapStateToProps,{ logout }) (Sidebar)

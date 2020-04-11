@@ -66,6 +66,44 @@ router.post('/create-folder',auth, async(req, res) => {
 
     res.status(200).json({ "msg" : "folder created successfully" })
 });
-    
 
+router.post('/rename-folder',auth, async(req, res) => {
+ 
+  const appPath =  path.resolve(process.cwd());
+  //await fs.unlink(file_path+"/"+req.body.path)
+ 
+  const newFolder = appPath+"/"+file_path+"/"+req.body.path+"/"+ req.body.new_name;
+  const oldFolder = appPath+"/"+file_path+"/"+req.body.path+"/"+ req.body.old_name;
+  console.log('newFolder',newFolder);
+  
+  fs.rename(oldFolder, newFolder, function(err) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log("Successfully renamed the directory.")
+    }
+  })
+
+    res.status(200).json({ "msg" : "Successfully renamed the directory." })
+});
+    
+router.post('/delete-folder',auth, async(req, res) => {
+ 
+  const appPath =  path.resolve(process.cwd());
+  //await fs.unlink(file_path+"/"+req.body.path)
+ console.log('body.path',req.body.path);
+ 
+  const delete_path = appPath+"/"+file_path+"/"+req.body.path+"/" +req.body.folder_name
+  console.log(delete_path);
+  
+  fs.rmdir(delete_path, (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    res.status(200).json({ "msg" : "folder deleted successfully" })
+  });
+    
+})
 module.exports = router;

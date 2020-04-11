@@ -61,7 +61,7 @@ class Upload extends Component {
      
      })
 
-     this.props.upload(data);
+     this.props.upload(data, this.props.path);
  
   }
 

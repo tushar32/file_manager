@@ -1,18 +1,32 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useFocus, useRef } from 'react';
 import Upload from '../Upload/Upload';
 import cx from './Images.module.css';
 import cs from './../../containers/FolderContainer/FolderContainer.module.css';
-import {Link} from 'react-router-dom'
 
 import { Row } from 'react-bootstrap';
  
 const Images = (props) => {
-  
+
    const { nodeTreeFiles }  = props;
    console.log('props', props);
    
-   const [ renameDir , setRenameDir ] = useState(false);
+   const [ renameDir , setRenameDir ] = useState({ id:0, display: 'none' });
+   const [ folderText, setFolderText ] = useState({ id: 0, value: '' });
 
+
+   const hanldeToggleDir = (e,folder_id, folder_name) => {
+     setRenameDir({ id: folder_id, display:'block' })
+     setFolderText({ id: folder_id, value: folder_name })
+   }
+   
+  
+
+   const handleChange = (e) => {
+       
+    setFolderText({ id: e.target.id, value: e.target.value })
+   }
+
+   
    return (
     <Fragment>
   
@@ -21,12 +35,15 @@ const Images = (props) => {
     <Row className="mt-3">
         {
             nodeTreeFiles.folders.map(folder => {
+              
                 return (
                    
-                   <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id}>
+                   <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id }
+                    onDoubleClick={ e => props.goToFolder(e, folder.name)}
+                   >
                          <div className={ cs.folder_icon }>
                              <div className={ cx.hover }>
-                                 <a href="javascript:void(0)" onClick={e => props.delete(e,folder.name) }>
+                                 <a href="javascript:void(0)" onClick={e => props.deleteDir(e,folder.name) }>
                                      <i className="fas fa-trash"></i>
                                  </a>
                              </div>
@@ -34,19 +51,20 @@ const Images = (props) => {
                                  <i className="fa fa-folder fa-7x"  style={{ color: '#890606' }}></i>
                              </a>
                              <div className={ cs.folder_name }>
-                                 <div className="m-b-5 text-center">
-                                     { 
-                                      renameDir ? (
-                                        <input type="text" value={ folder.name }></input>
-                                     ) : ( 
-                                          <Link to="" onClick={ () => setRenameDir(!renameDir)}
-                                          onBlur={ () => setRenameDir(!renameDir)}
-                                          >
-                                              { folder.name }</Link> 
-                                       )
-                                     }
+                                 <div className="m-b-5 text-center" onBlur={ () => setRenameDir(!renameDir)}>
                                      
-
+                                     { renameDir.id == folder.id ? 
+                                     <input type="text"   onChange={e => handleChange(e)} value={ folderText.value } 
+                                      id={folder.id} style={{ display: renameDir }} onKeyDown={ e => props.rename(e,folder.name) } />: 
+                                        
+                                     
+                                    <a href="javascript:void(0)" data_id={folder.id}  
+                                    onClick={ (e) => hanldeToggleDir(e, folder.id, folder.name)} >
+                                     
+                                        { folder.name }</a> 
+                                    }
+                                       
+                                    
                                   </div>
                              </div>
                          </div>
@@ -64,7 +82,7 @@ const Images = (props) => {
               <div className="card">
                   <div className="file">
                       <div className="hover">
-                      <a onClick={e => props.delete(e,file.name) }>
+                      <a href="javascript:void(0)" onClick={e => props.delete(e,file.name) }>
                                      <i className="fas fa-trash"></i>
                         </a>
                       </div>

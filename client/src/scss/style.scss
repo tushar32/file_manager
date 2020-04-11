@@ -16,8 +16,17 @@ body{
   border-radius: .55rem;
 }
 
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle
+{
+  background-color:#a134d4;
+  border-color: #a31be2
+}
+
 img{
   max-width: 100%;
+}
+.breadcrumb{
+  background-color:  none!important;
 }
 
 .sidebar{

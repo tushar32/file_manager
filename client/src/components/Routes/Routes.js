@@ -11,7 +11,7 @@ const Routes = () => {
    return (
       <div>
         <Switch>
-            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute exact path='/file-manager' component={Dashboard} />
             <SessionLayout exact path='/login' component={Login} />
             <SessionLayout exact path='/register' component={Register} />
         </Switch>

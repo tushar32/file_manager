@@ -28,7 +28,7 @@ const Login = ({ login, isAuth }) => {
     }
 
     if(isAuth){
-      return <Redirect to="/dashboard"></Redirect>
+      return <Redirect to="/file-manager"></Redirect>
     }
     
    return (

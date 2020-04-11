@@ -7,7 +7,7 @@ import { Col, Row } from 'react-bootstrap';
 const SessionRoute = ({ component: Component,auth: { isAuth, loading },...rest }) => (
   <Route {...rest}
     render={ props =>
-      !isAuth && !loading ? (  <Redirect to='/login' />) : ( 
+      ( 
       
       <div class="authentication">
         <div class="container">

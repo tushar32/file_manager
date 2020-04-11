@@ -19,7 +19,7 @@ exports.getRootNodes = function() {
        rootDirs.push( {
         name: rootNode,
         id: uuid.v4(),
-        path: '/'+rootNode,
+        path: rootNode,
         children: []
       })
     });

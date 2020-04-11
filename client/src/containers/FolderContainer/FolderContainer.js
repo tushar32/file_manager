@@ -4,9 +4,11 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Images from './../../components/Images/Images';
 import Actions from './../../components/Upload/Actions';
-import { deleteFile, createFolder } from './../../actions/nodeStructure';
+import { getFiles, deleteFile, createFolder,renameFolder, deleteFolder } 
+   from './../../actions/nodeStructure';
 
-const FolderContainer = ({  files : { nodeTreeFiles, loading }, deleteFile, createFolder  }) => {
+const FolderContainer = ({  files : { nodeTreeFiles, loading }, 
+    deleteFile, createFolder, renameFolder, deleteFolder,getFiles  }) => {
 
     let fileComponent = null;
     const path = nodeTreeFiles ? nodeTreeFiles.path : null;
@@ -21,10 +23,26 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading }, deleteFile, crea
        }
     }
 
+    const handlerDeleteFolder = (e,folder_name) => {
+
+        if( window.confirm('Are you sure want to delete a folder?')) {
+             deleteFolder({ folder_name,current_path, path })
+        }
+     }
+
     const handleCreateFolder = () => {
-        console.log('dsdsfafsc');
-        
         createFolder({ current_path, path })
+    }
+
+    const handleRenameFolder = (e,old_name) => {
+        if(e.keyCode == 13){
+            const new_name =  e.target.value;
+            renameFolder({old_name, current_path, path, new_name })
+        }
+    }
+
+    const handleGoToFolder = (e, folder_name) => {
+        getFiles(current_path + '/'+folder_name )
     }
 
     if(nodeTreeFiles) {
@@ -33,6 +51,10 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading }, deleteFile, crea
             case 'images':
                 fileComponent = <Images nodeTreeFiles={ nodeTreeFiles } 
                 delete={ handlerDeleteFile }
+                deleteDir={ handlerDeleteFolder }
+                rename={ handleRenameFolder }
+                goToFolder={ handleGoToFolder }
+                
                 dropzone={ dropzone } />
                 break;
             default:
@@ -57,10 +79,14 @@ FolderContainer.propTypes = {
     files: PropTypes.object.isRequired,
     deleteFile: PropTypes.func.isRequired,
     createFolder: PropTypes.func.isRequired,
+    renameFolder: PropTypes.func.isRequired,
+    deleteFolder: PropTypes.func.isRequired,
+    getFiles: PropTypes.func.isRequired,
+    
 }
 
 const mapStateToProps = state => ({
     files: state.files
 });
  
-export default connect(mapStateToProps,{ deleteFile, createFolder }) (withRouter(FolderContainer));
+export default connect(mapStateToProps,{ getFiles, deleteFile, createFolder, renameFolder, deleteFolder }) (withRouter(FolderContainer));

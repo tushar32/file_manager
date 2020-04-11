@@ -67,23 +67,42 @@ export const createFolder = ({ file_name,current_path, path }) => async dispatch
     }
 };
 
-export const renameFolder = ({ folder_name,current_path, path }) => async dispatch => {
+export const renameFolder = ({ old_name,current_path, path,new_name }) => async dispatch => {
    
     const options = {
         headers: {
             'Content-Type' : 'application/json'
         }
     }
-      const data = JSON.stringify({ folder_name, path })
+      const data = JSON.stringify({old_name, new_name,current_path,path })
     try {
         await axios.post('/api/node-tree/rename-folder',data,options);
 
         dispatch(getFiles(current_path));
-            
+        dispatch(getNodeTree());
+    
     } catch (error) {
         
     }
 };
 
+export const deleteFolder = ({ folder_name,current_path, path }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ folder_name,current_path, path })
+    try {
+        await axios.post('/api/node-tree/delete-folder',data,options);
+
+        dispatch(getFiles(current_path));
+        dispatch(getNodeTree());
+            
+    } catch (error) {
+        
+    }
+};
 
 
