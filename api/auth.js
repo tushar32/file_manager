@@ -29,9 +29,15 @@ router.post('/login',[
 
     try{
         let user = await User.findOne({ email });
+         /*
+          error format shuold be 
+          "email" :{ msg: 'Invalid email'}}
+          where email should be name of field for with the error whoulb be displayed from front side
+          <Alert name="email />":
+          */
 
         if(!user){
-            return res.status(400).json({ errors: [{ msg: 'Invalid Credentials'}]})
+            return res.status(400).json({ errors: { "invalid_credential" :{ msg: 'Invalid Credentials'}} })
         }
 
         const isMatch = await bcrypt.compare(password,user.password);

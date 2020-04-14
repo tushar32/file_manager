@@ -11,8 +11,12 @@ connectDB();
 
 global.__basedir = path.resolve(__dirname);
 
-app.use('/uploads/images', express.static(path.join('client','uploads','Tushar_barate_5e88192e145e2b1ead5c9fa0','images')));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -31,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('client/build'));
   
-    app.get('*', (req, res) => {
+    app.get('/*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
   }

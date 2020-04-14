@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useFocus, useRef } from 'react';
+import React, { Fragment, useState } from 'react';
 import Upload from '../Upload/Upload';
 import cx from './Images.module.css';
 import cs from './../../containers/FolderContainer/FolderContainer.module.css';
@@ -8,7 +8,6 @@ import { Row } from 'react-bootstrap';
 const Images = (props) => {
 
    const { nodeTreeFiles }  = props;
-   console.log('props', props);
    
    const [ renameDir , setRenameDir ] = useState({ id:0, display: 'none' });
    const [ folderText, setFolderText ] = useState({ id: 0, value: '' });
@@ -35,7 +34,6 @@ const Images = (props) => {
     <Row className="mt-3">
         {
             nodeTreeFiles.folders.map(folder => {
-              
                 return (
                    
                    <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id }
@@ -43,27 +41,26 @@ const Images = (props) => {
                    >
                          <div className={ cs.folder_icon }>
                              <div className={ cx.hover }>
-                                 <a href="javascript:void(0)" onClick={e => props.deleteDir(e,folder.name) }>
-                                     <i className="fas fa-trash"></i>
-                                 </a>
+                                 <button className={`${cs.trash} link-button` } onClick={e => props.deleteDir(e,folder.name) }>
+                                     <i className="fas fa-trash" style={{ color: '#a31be2' }}></i>
+                                 </button>
                              </div>
-                             <a href="javascript:void(0)" className={ cx.folder }>
+                             <button className={ `${cs.folder} link-button` }>
                                  <i className="fa fa-folder fa-7x"  style={{ color: '#890606' }}></i>
-                             </a>
+                             </button>
                              <div className={ cs.folder_name }>
                                  <div className="m-b-5 text-center" onBlur={ () => setRenameDir(!renameDir)}>
                                      
-                                     { renameDir.id == folder.id ? 
+                                     { renameDir.id === folder.id ? 
                                      <input type="text"   onChange={e => handleChange(e)} value={ folderText.value } 
                                       id={folder.id} style={{ display: renameDir }} onKeyDown={ e => props.rename(e,folder.name) } />: 
                                         
                                      
-                                    <a href="javascript:void(0)" data_id={folder.id}  
+                                    <button className="link-button" data_id={folder.id}  
                                     onClick={ (e) => hanldeToggleDir(e, folder.id, folder.name)} >
                                      
-                                        { folder.name }</a> 
+                                        { folder.name }</button> 
                                     }
-                                       
                                     
                                   </div>
                              </div>
@@ -82,9 +79,9 @@ const Images = (props) => {
               <div className="card">
                   <div className="file">
                       <div className="hover">
-                      <a href="javascript:void(0)" onClick={e => props.delete(e,file.name) }>
+                      <button className={`${cs.trash} link-button` } onClick={e => props.delete(e,file.name) }>
                                      <i className="fas fa-trash"></i>
-                        </a>
+                        </button>
                       </div>
                       <div className={ cx.image }>
                           <img src={ file.filePath } alt="img" className="img-fluid" />

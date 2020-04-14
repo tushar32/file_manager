@@ -11,10 +11,13 @@
 .folder_icon{
     background-color: transparent;
 }
-.folder_icon:hover{
+.folder:hover{
     opacity: 0.7;
 }
 
 .folder_icon a{
-  color:black
+  color: #303030
+}
+.trash{
+  color: #a31be2
 }

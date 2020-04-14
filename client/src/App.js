@@ -14,7 +14,7 @@ if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 
- export default function App(){
+const  App = () => {
 
   useEffect( () => {
     store.dispatch(loadUser())
@@ -33,3 +33,5 @@ if(localStorage.token){
     </Provider>
     );
 }
+
+export default App;

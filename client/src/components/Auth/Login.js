@@ -45,7 +45,7 @@ const Login = ({ login, isAuth }) => {
          <div className="card-plain">
 
           <h2 className="large text-primary">Sign In</h2>
-     
+          <Alert name="invalid_credential" />
 
           <form className="form" onSubmit={e => onSubmit(e) }>
             <div className="input-group">

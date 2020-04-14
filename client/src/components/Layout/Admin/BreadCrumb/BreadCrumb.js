@@ -11,16 +11,16 @@ import { getFiles } from "./../../../../actions/nodeStructure";
 
         return (
 
-        <ul class="breadcrumb padding-0">
+        <ul className="breadcrumb padding-0">
 
-            <li class="breadcrumb-item"><a href="/file-manager"><i className="fa fa-home"></i></a></li>
+            <li className="breadcrumb-item"><a href="/file-manager"><i className="fa fa-home"></i></a></li>
             { nodeTreeFiles !== null ?  
                
                nodeTreeFiles.current_path.split("/")
               
-                 .map(path => {
-                    return  (<li class="breadcrumb-item active">
-                       <a href="javascript:void(0)" onClick={e => handleGetFiles(e, path)}> { path } </a> 
+                 .map((path,index) => {
+                    return  (<li key={ index } className="breadcrumb-item active">
+                       <button className="link-button" onClick={e => handleGetFiles(e, path)}> { path } </button> 
                         </li>)
                  })
              : ''

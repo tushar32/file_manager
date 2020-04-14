@@ -16,14 +16,14 @@ const Alert = (props) => {
   
   return name in alerts ? (
       
-      <span class="invalid-feedback" style={{ "display": "block" }}> { alerts[name].msg } </span>
+      <p className="invalid-feedback label-danger" style={{ "display": "block" }}> { alerts[name].msg } </p>
   
   ) :'' ;
   
 }
 
 Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

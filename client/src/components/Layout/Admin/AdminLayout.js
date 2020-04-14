@@ -6,8 +6,8 @@ const AdminLayout = ({ children }) =>
   
     <Fragment>
       <Sidebar />
-      <section class="content file_manager">    
-          <div class="container-fluid">
+      <section className="content file_manager">    
+          <div className="container-fluid">
             <Header />
             <div className="content">
             { children }

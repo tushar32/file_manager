@@ -1,4 +1,4 @@
-import { SET_ALERT, REMOVE_ALERT } from './types';
+import { SET_ALERT } from './types';
 
 export const setAlert = (alerts, timeout = 5000) => dispatch => {
    

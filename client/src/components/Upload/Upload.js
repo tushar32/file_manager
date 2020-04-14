@@ -106,7 +106,7 @@ class Upload extends Component {
                 return (
                     <div key={index} className="file-items"> 
                       <div className="file-image">
-                          <img src={URL.createObjectURL(file)} />
+                          <img src={URL.createObjectURL(file)}  alt="" />
                         </div>
                         <div className="dz-details">    
                           <div className="dz-size">
@@ -117,10 +117,10 @@ class Upload extends Component {
                               { file.name }
                             </span>
                           </div>
-                          <div class="dz-success-mark">
-                              <a href="javascript:void(0)" onClick={ (e) =>  this.removeFile(e, index) }>
-                                <i class="far fa-times-circle fa-3x" 
-                            ></i> </a>
+                          <div className="dz-success-mark">
+                              <button className='link-button' onClick={ (e) =>  this.removeFile(e, index) }>
+                                <i className="far fa-times-circle fa-3x" 
+                            ></i> </button>
                           </div>
                         </div>
                       {/* { this.renderProgress(file)} */}

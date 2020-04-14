@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
@@ -9,8 +9,8 @@ const SessionRoute = ({ component: Component,auth: { isAuth, loading },...rest }
     render={ props =>
       ( 
       
-      <div class="authentication">
-        <div class="container">
+      <div className="authentication">
+        <div className="container">
             <Col className="content-center">
                 <Row><Component {...props} /></Row>
             </Col>

@@ -6,6 +6,8 @@ import Images from './../../components/Images/Images';
 import Actions from './../../components/Upload/Actions';
 import { getFiles, deleteFile, createFolder,renameFolder, deleteFolder } 
    from './../../actions/nodeStructure';
+import Loader from './../../components/Layout/Ui/Loader'
+
 
 const FolderContainer = ({  files : { nodeTreeFiles, loading }, 
     deleteFile, createFolder, renameFolder, deleteFolder,getFiles  }) => {
@@ -35,7 +37,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     }
 
     const handleRenameFolder = (e,old_name) => {
-        if(e.keyCode == 13){
+        if(e.keyCode === 13){
             const new_name =  e.target.value;
             renameFolder({old_name, current_path, path, new_name })
         }
@@ -64,7 +66,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     }
     
 return loading && nodeTreeFiles === null ?  (
-    <div> loading</div>
+    <Loader />
 ) : (
         <Fragment>
             <Actions type={ nodeTreeFiles.root } newFolder={ handleCreateFolder } 
