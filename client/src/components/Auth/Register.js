@@ -25,7 +25,7 @@ const Register = ({ setAlert, register ,isAuth}) => {
     })
 
     if(isAuth){
-      return <Redirect to="/dashboard"></Redirect>
+      return <Redirect to="/file-manager"></Redirect>
     }
 
     const onSubmit = e =>  {

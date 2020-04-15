@@ -1,14 +1,14 @@
 
 const readdirp = require("readdirp");
 const path = require('path');
-const { rootNodes, fileExtensions }= require('./../../config/config');
+const { rootNodes, file_path, fileExtensions }= require('./../../config/config');
 var uuid = require('uuid');
 const { addToStructure, getRootNodes } = require('./helpers');
 
 exports.getStreams = async function( user, node = ''){ // default node = ''  is a root
 
     const appPath =  path.resolve(process.cwd());
-    const folderPath = appPath+"/client/public/uploads/"+user.name.replace(" ","_")+'_'+user.id+'/'+node;
+    const folderPath = appPath+"/"+file_path+"/"+user.name.replace(" ","_")+'_'+user.id+'/'+node;
 
     console.log(folderPath);
     
@@ -24,7 +24,7 @@ exports.getStreams = async function( user, node = ''){ // default node = ''  is 
     
     // Iterate recursively through a folder
    const streams = await readdirp.promise(folderPath,settings);
-   //  console.log('streams',streams);
+     console.log('streams',streams);
      
      streams.map(file => {
 
@@ -76,11 +76,10 @@ exports.getStreams = async function( user, node = ''){ // default node = ''  is 
 
 exports.getChildrenStreams = async function (user , nodePath){
   const appPath =  path.resolve(process.cwd());
-  const folderPath = appPath+"/client/public/uploads/"+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath;
+  const folderPath = appPath+"/"+file_path+"/"+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath;
+//console.log(folderPath);
 
   let root = nodePath.split('/').shift();
-  console.log('root',root);
-  console.log('nodePath',nodePath);
   
   if(!root)  root = nodePath.slice('1');
   
@@ -103,7 +102,7 @@ exports.getChildrenStreams = async function (user , nodePath){
         name: file.basename,
         id: uuid.v4(),
         folderPath : folderPath,
-        filePath : '/uploads/'+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath+"/"+file.basename,
+        filePath : file_path+'/'+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath+"/"+file.basename,
         type : 'file'
       })
     } else {

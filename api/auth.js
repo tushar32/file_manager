@@ -7,7 +7,7 @@ const config = require('config');
 const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
 const multer = require('multer') ; 
-const { rootNodes }= require('./../config/config');
+const { rootNodes,file_path }= require('./../config/config');
 
 // @Route api/auth
 // @desc Login user
@@ -99,15 +99,15 @@ router.post('/register', [
 
         await user.save();
 
+        console.log(file_path)
         rootNodes.map(rootNode => {
             multer({ storage : 
               multer.diskStorage({
-              destination: 'client/public/uploads/'+user.name+'_'+user.id+'/'+rootNode
+              destination: file_path+'/'+user.name+'_'+user.id+'/'+rootNode
             })
          })
         });
       
-
         const payload = {
             user: {
                 id: user.id
