@@ -22,6 +22,8 @@ export const getFiles = (path) => async dispatch => {
     console.log('action', path);
     
     try {
+        //call reducer to make nodetree files set to null
+        // so that loader can be set
         dispatch({
             type: NO_FILES
         });
