@@ -37,7 +37,7 @@ const Images = (props) => {
                 return (
                    
                    <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id }
-                    onDoubleClick={ e => props.goToFolder(e, folder.name)}
+                    
                    >
                          <div className={ cs.folder_icon }>
                              <div className={ cx.hover }>
@@ -45,7 +45,7 @@ const Images = (props) => {
                                      <i className="fas fa-trash" style={{ color: '#a31be2' }}></i>
                                  </button>
                              </div>
-                             <button className={ `${cs.folder} link-button` }>
+                             <button className={ `${cs.folder} link-button` } onDoubleClick={ e => props.goToFolder(e, folder.name)}>
                                  <i className="fa fa-folder fa-7x"  style={{ color: '#890606' }}></i>
                              </button>
                              <div className={ cs.folder_name }>

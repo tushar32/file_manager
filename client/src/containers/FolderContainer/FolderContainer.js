@@ -37,6 +37,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     }
 
     const handleRenameFolder = (e,old_name) => {
+       
         if(e.keyCode === 13){
             const new_name =  e.target.value;
             renameFolder({old_name, current_path, path, new_name })
@@ -44,6 +45,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     }
 
     const handleGoToFolder = (e, folder_name) => {
+       
         getFiles(current_path + '/'+folder_name )
     }
 
