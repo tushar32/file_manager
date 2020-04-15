@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 console.log(' Express Server connected')
@@ -8,6 +9,7 @@ console.log(' Express Server connected')
 //connect database
 connectDB();
 
+app.use(cors())
 // Init Middleware
 app.use(express.json({ extended: false }));
 

@@ -39,7 +39,6 @@ router.post('/delete',auth, async(req, res) => {
   //await fs.unlink(file_path+"/"+req.body.path)
  
   const delete_path = appPath+"/"+file_path+"/"+req.body.path+"/" +req.body.file_name
-  console.log(delete_path);
   
   fs.unlink(delete_path, (err) => {
     if (err) {
