@@ -1,6 +1,7 @@
 import {
     ALL_NODES,
-    IMAGE_FILES
+    IMAGE_FILES,
+    NO_FILES
 } from './types';
 import axios from 'axios';
 
@@ -21,6 +22,10 @@ export const getFiles = (path) => async dispatch => {
     console.log('action', path);
     
     try {
+        dispatch({
+            type: NO_FILES
+        });
+
         const res = await axios.get('/api/node-tree/files?path='+path);
         dispatch({
             type: IMAGE_FILES,

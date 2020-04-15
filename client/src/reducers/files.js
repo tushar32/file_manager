@@ -1,5 +1,6 @@
 import {
     IMAGE_FILES,
+    NO_FILES,
     UPLOAD
 } from '../actions/types';
 
@@ -19,6 +20,15 @@ const initialState = {
                 error:'',
                 loading: false
             }
+            case NO_FILES:
+                return {
+                    ...state ,
+                    nodeTreeFiles: null,
+                    error:'',
+                    loading: true
+                }
+    
+            
         case UPLOAD:
         return {
             ...state

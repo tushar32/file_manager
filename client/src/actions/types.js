@@ -9,3 +9,5 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const ALL_NODES = 'ALL_NODES';
 export const IMAGE_FILES = 'IMAGE_FILES';
 export const UPLOAD = 'UPLOAD';
+export const NO_FILES = 'NO_FILES';
+
