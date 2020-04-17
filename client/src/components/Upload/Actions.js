@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
  
 const Actions = (prop) => {
     console.log('action',prop);
-    
+    const { type } = prop;
    return (
        <Fragment>
             <div className={ cx.Card }>
@@ -17,7 +17,17 @@ const Actions = (prop) => {
                     <Button variant="outline-primary" key="2" onClick={ prop.newFolder }>
                         New Folder
                     </Button>
-                        
+                    {' '}
+                    <Button  key="3" className="float-right" onClick={ prop.newFolder }>
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                    </Button>
+
+                    { 
+                     type == 'documents' ? (
+                        <Button variant="outline-primary" key="4" onClick={ prop.newDocument }>
+                           <i class="fas fa-file-alt"></i> New text
+                        </Button>
+                    ) : '' }
                 </div>
             </div>
     </Fragment>

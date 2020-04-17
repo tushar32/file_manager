@@ -112,4 +112,39 @@ export const deleteFolder = ({ folder_name,current_path, path }) => async dispat
     }
 };
 
+export const createDocument = ({ file_name,current_path, path }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ file_name, path })
+    try {
+        await axios.post('/api/node-tree/new-document',data,options);
+
+        dispatch(getFiles(current_path));
+            
+    } catch (error) {
+        
+    }
+};
+
+export const readFile = ({ current_path, path, filePath }) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ file_name, path })
+    try {
+        await axios.post('/api/node-tree/new-document',data,options);
+
+        dispatch(getFiles(current_path));
+            
+    } catch (error) {
+        
+    }
+};
 

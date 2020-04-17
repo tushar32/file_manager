@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import Upload from '../Upload/Upload';
-import cx from './Images.module.css';
+import cx from './../Images/Images.module.css';
 import cs from './../../containers/FolderContainer/FolderContainer.module.css';
-import { Row } from 'react-bootstrap';
-import raw from "raw.macro";
 
-const Images = (props) => {
+import { Row } from 'react-bootstrap';
+ 
+const Documents = (props) => {
 
    const { nodeTreeFiles }  = props;
    
@@ -18,11 +18,9 @@ const Images = (props) => {
      setFolderText({ id: folder_id, value: folder_name })
    }
    
-   const handleChange = (e) => {
-        setFolderText({ id: e.target.id, value: e.target.value })
+   const handleChange = (e) => {    
+    setFolderText({ id: e.target.id, value: e.target.value })
    }
-
-   
 
    
    return (
@@ -35,9 +33,7 @@ const Images = (props) => {
             nodeTreeFiles.folders.map(folder => {
                 return (
                    
-                   <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id }
-                    
-                   >
+                   <div className="col-lg-2 col-md-3 col-sm-12  mt-3" key={folder.id }>
                          <div className={ cs.folder_icon }>
                              <div className={ cx.hover }>
                                  <button className={`${cs.trash} link-button` } onClick={e => props.deleteDir(e,folder.name) }>
@@ -58,7 +54,8 @@ const Images = (props) => {
                                     <button className="link-button" data_id={folder.id}  
                                     onClick={ (e) => hanldeToggleDir(e, folder.id, folder.name)} >
                                      
-                                        { folder.name }</button> 
+                                        { folder.name }
+                                        </button> 
                                     }
                                     
                                   </div>
@@ -78,35 +75,17 @@ const Images = (props) => {
               <div className="card">
                   <div className="file">
                       <div className="hover">
-                            <button className={`${cs.trash} link-button` } onClick={e => props.delete(e,file.name) }>
+                      <button className={`${cs.trash} link-button` } onClick={e => props.delete(e,file.name) }>
                                      <i className="fas fa-trash"></i>
-                            </button>
+                        </button>
                       </div>
-                      { nodeTreeFiles.root == 'images' ? 
-                      (
-                          <Fragment>
-                            <div className={ cx.image }  >
-                                <img src={ file.filePath } alt="img" className="img-fluid" />
-                            </div>
-                            <div className={ cx.file_name }>
-                                <span className="m-b-5 text-muted">{ file.name }</span>
-                            </div>
-                            
-                        </Fragment>
-                      ) :
-                      (
-                        <Fragment>
-                            <div className={ cx.image } onClick={(e) => prop.showFile(e,file.filePath)}>
-                                <i class="fas fa-file-alt fa-10x"></i> 
-                            </div>
-                            <div className={ cx.file_name }>
+                      <div className={ cx.image }>
+                          <img src={ file.filePath } alt="img" className="img-fluid" />
+                      </div>
+                      <div className={ cx.file_name }>
+                          <span className="m-b-5 text-muted">{ file.name }</span>
                          
-                         <span className="m-b-5 text-muted">{ file.name }</span>
-                            </div>
-                        </Fragment>
-                      )
-                     }
-
+                      </div>
                   </div>
               </div>
           </div>
@@ -121,4 +100,4 @@ const Images = (props) => {
     
 };
  
-export default Images
+export default Documents

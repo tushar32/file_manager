@@ -105,4 +105,19 @@ router.post('/delete-folder',auth, async(req, res) => {
   });
     
 })
+
+router.post('/new-document',auth, async(req, res) => {
+ 
+  const appPath =  path.resolve(process.cwd());
+  //await fs.unlink(file_path+"/"+req.body.path)
+ 
+  const filePath = appPath+"/"+file_path+"/"+req.body.path+"/new_document.txt"
+ 
+  
+  fs.closeSync(fs.openSync(filePath, 'w'))
+
+
+    res.status(200).json({ "msg" : "document created successfully" })
+});
+
 module.exports = router;
