@@ -137,7 +137,7 @@ export const readFile = ({ current_path, path, filePath }) => async dispatch => 
             'Content-Type' : 'application/json'
         }
     }
-      const data = JSON.stringify({ file_name, path })
+      const data = JSON.stringify({ filePath, path })
     try {
         await axios.post('/api/node-tree/new-document',data,options);
 
