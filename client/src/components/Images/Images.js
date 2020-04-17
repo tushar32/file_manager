@@ -96,7 +96,7 @@ const Images = (props) => {
                       ) :
                       (
                         <Fragment>
-                            <div className={ cx.image } onClick={(e) => prop.showFile(e,file.filePath)}>
+                            <div className={ cx.image } onClick={(e) => props.showFile(e,file.filePath)}>
                                 <i class="fas fa-file-alt fa-10x"></i> 
                             </div>
                             <div className={ cx.file_name }>
