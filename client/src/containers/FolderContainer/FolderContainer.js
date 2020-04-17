@@ -55,7 +55,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
 
     const handleShowFile = async (e,filePath) => {
         e.preventDefault()
-         // readFile({ current_path, path,filePath})
+          readFile({ current_path, path,filePath})
       }
 
     
