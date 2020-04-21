@@ -19,13 +19,13 @@ const Actions = (prop) => {
                     </Button>
                     {' '}
                     <Button  key="3" className="float-right" onClick={ prop.newFolder }>
-                    <i class="far fa-arrow-alt-circle-left"></i>
+                    <i className="far fa-arrow-alt-circle-left"></i>
                     </Button>
 
                     { 
                      type == 'documents' ? (
                         <Button variant="outline-primary" key="4" onClick={ prop.newDocument }>
-                           <i class="fas fa-file-alt"></i> New text
+                           <i className="fas fa-file-alt"></i> New text
                         </Button>
                     ) : '' }
                 </div>

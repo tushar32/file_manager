@@ -5,18 +5,29 @@ import { connect } from "react-redux";
 import Images from './../../components/Images/Images';
 
 import Actions from './../../components/Upload/Actions';
-import { getFiles, createDocument,deleteFile, createFolder,renameFolder, deleteFolder } 
+import { getFiles,saveFile,readFile, createDocument,deleteFile, createFolder,renameFolder, deleteFolder } 
    from './../../actions/nodeStructure';
 import Loader from './../../components/Layout/Ui/Loader'
+import { Modal, Form } from 'react-bootstrap';
     
 
 const FolderContainer = ({  files : { nodeTreeFiles, loading }, 
-    deleteFile, createFolder, renameFolder,createDocument, deleteFolder,getFiles  }) => {
+    deleteFile, createFolder, renameFolder,createDocument,readFile,saveFile,
+     deleteFolder,getFiles  }) => {
 
     const path = nodeTreeFiles ? nodeTreeFiles.path : null;
     const current_path = nodeTreeFiles? nodeTreeFiles.current_path : null;
 
     const [ dropzone, setDropzone ] = useState(false);
+    const [ fileContent, setFileContent ] = useState({ isOpen: false, content:'' , name: '',path });
+    const [show, setShow] = useState(true);
+    const [keyStoke, setKeyStroke] = useState('');
+
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        
+        setFileContent({ ...fileContent, content: e.target.value  })
+    }
 
     const handlerDeleteFile = (e,file_name) => {
 
@@ -53,18 +64,54 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
         createDocument({ current_path, path })
     }
 
-    const handleShowFile = async (e,filePath) => {
+    const handleShowFile = async (e,fileName, filePath) => {
         e.preventDefault()
-         // readFile({ current_path, path,filePath})
+       
+        const data = await readFile({ fileName,filePath});
+         console.log('datasdsafsd',data);
+         
+        setFileContent({ isOpen: true,content: data.data.data, name: fileName, path: filePath })
+        setShow(true)
       }
 
+      const handleClose = () => setShow(false);
     
+      const handleSaveFile = (e) => {
+        e.preventDefault();
+        console.log(e.key);
+        setKeyStroke(e.key);
+        console.log('keyStoke',keyStoke);
+
+        if( (keyStoke == 'Control' && e.key =='.' ) || (keyStoke == '.' && e.key =='Control'  )){
+            
+            saveFile(e.target.value,fileContent.path);
+            
+        }
+      }
+
 return loading && nodeTreeFiles === null ?  (
     <Loader />
 ) : (
         <Fragment>
+
+            { fileContent.isOpen ? (
+               <Modal show={show} onHide={handleClose}>
+               <Modal.Header closeButton>
+                 <Modal.Title>{fileContent.name}</Modal.Title>
+               </Modal.Header>
+               <Modal.Body> 
+                    <Form.Control as="textarea" rows="50" onChange={e => handleChange(e) } 
+                     onKeyUp={e => handleSaveFile(e)}>
+                        { fileContent.content }
+                    </Form.Control>
+               </Modal.Body>
+              
+             </Modal>
+            ) : ''
+            }
             <Actions type={ nodeTreeFiles.root } newFolder={ handleCreateFolder } 
             click= { () =>  { setDropzone(!dropzone) } } newDocument={ handleNewDocument } />
+
           <Images nodeTreeFiles={ nodeTreeFiles }  delete={ handlerDeleteFile }
                 deleteDir={ handlerDeleteFolder }
                 rename={ handleRenameFolder }
@@ -84,11 +131,15 @@ FolderContainer.propTypes = {
     renameFolder: PropTypes.func.isRequired,
     deleteFolder: PropTypes.func.isRequired,
     getFiles: PropTypes.func.isRequired,
-    createDocument: PropTypes.func.isRequired   
+    createDocument: PropTypes.func.isRequired,
+    readFile: PropTypes.func.isRequired ,
+    saveFile: PropTypes.func.isRequired ,
+
+    
 }
 
 const mapStateToProps = state => ({
     files: state.files
 });
  
-export default connect(mapStateToProps,{ getFiles, deleteFile, createDocument, createFolder, renameFolder, deleteFolder }) (withRouter(FolderContainer));
+export default connect(mapStateToProps,{ getFiles,saveFile, readFile, deleteFile, createDocument, createFolder, renameFolder, deleteFolder }) (withRouter(FolderContainer));

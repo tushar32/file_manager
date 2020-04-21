@@ -120,4 +120,51 @@ router.post('/new-document',auth, async(req, res) => {
     res.status(200).json({ "msg" : "document created successfully" })
 });
 
+router.post('/read-file',auth, async(req, res) => {
+ 
+  const appPath =  path.resolve(process.cwd());
+  //await fs.unlink(file_path+"/"+req.body.path)
+ 
+  const filePath = appPath+"/"+req.body.filePath;
+  console.log('filePath',filePath);
+  
+  try {
+    fs.readFile(filePath, function(err, data) {
+      res.status(200).json({ "msg" : "file read successfully",data : data.toString() })
+    });
+
+  } catch (error) {
+       console.error(err);
+        res.status(500).send(err);
+  }
+  
+
+
+  
+});
+
+router.post('/save-file',auth, async(req, res) => {
+ 
+  const appPath =  path.resolve(process.cwd());
+  //await fs.unlink(file_path+"/"+req.body.path)
+ 
+  const filePath = appPath+"/"+req.body.filePath;
+  console.log('filePath',req.body.fileContent);
+  
+  try {
+    fs.writeFile(filePath,req.body.fileContent ,(err) => {
+      if (err) console.log(err);
+      console.log("Successfully Written to File.");
+    } );
+
+  } catch (error) {
+       console.error(err);
+        res.status(500).send(err);
+  }
+  
+
+
+    res.status(200).json({ "msg" : "file read successfully",data : data })
+});
+
 module.exports = router;

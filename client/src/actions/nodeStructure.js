@@ -130,21 +130,36 @@ export const createDocument = ({ file_name,current_path, path }) => async dispat
     }
 };
 
-export const readFile = ({ current_path, path, filePath }) => async dispatch => {
+export const readFile = ({ fileName, filePath }) => async dispatch => {
    
     const options = {
         headers: {
             'Content-Type' : 'application/json'
         }
     }
-      const data = JSON.stringify({ filePath, path })
+      const data = JSON.stringify({ filePath, fileName })
     try {
-        await axios.post('/api/node-tree/new-document',data,options);
-
-        dispatch(getFiles(current_path));
+        return await axios.post('/api/node-tree/read-file',data,options);
             
     } catch (error) {
         
     }
 };
+
+export const saveFile = (fileContent, filePath ) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const data = JSON.stringify({ fileContent, filePath })
+    try {
+        return await axios.post('/api/node-tree/save-file',data,options);
+            
+    } catch (error) {
+        
+    }
+};
+
 

@@ -75,7 +75,7 @@ const Documents = (props) => {
               <div className="card">
                   <div className="file">
                       <div className="hover">
-                      <button className={`${cs.trash} link-button` } onClick={e => props.delete(e,file.name) }>
+                      <button className={`${cs.trash} link-button` } onDoubleClick={e => props.delete(e,file.name) }>
                                      <i className="fas fa-trash"></i>
                         </button>
                       </div>
@@ -88,7 +88,7 @@ const Documents = (props) => {
                       </div>
                   </div>
               </div>
-          </div>
+            </div>
          
          )
         })

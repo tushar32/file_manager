@@ -3,7 +3,6 @@ import Upload from '../Upload/Upload';
 import cx from './Images.module.css';
 import cs from './../../containers/FolderContainer/FolderContainer.module.css';
 import { Row } from 'react-bootstrap';
-import raw from "raw.macro";
 
 const Images = (props) => {
 
@@ -21,8 +20,6 @@ const Images = (props) => {
    const handleChange = (e) => {
         setFolderText({ id: e.target.id, value: e.target.value })
    }
-
-   
 
    
    return (
@@ -96,8 +93,8 @@ const Images = (props) => {
                       ) :
                       (
                         <Fragment>
-                            <div className={ cx.image } onClick={(e) => props.showFile(e,file.filePath)}>
-                                <i class="fas fa-file-alt fa-10x"></i> 
+                            <div className={ cx.image } onDoubleClick={(e) => props.showFile(e,file.name,file.filePath)}>
+                                <i className="fas fa-file-alt fa-10x"></i> 
                             </div>
                             <div className={ cx.file_name }>
                          
