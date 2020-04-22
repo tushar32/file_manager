@@ -54,7 +54,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
        
         if(e.keyCode === 13){
             const new_name =  e.target.value;
-            renameFolder({old_name, current_path, path, new_name })
+            renameFolder({ old_name, current_path, path, new_name })
         }
     }
 

@@ -4,7 +4,8 @@ import Alert from '../Layout/Ui/alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {  Redirect } from 'react-router-dom';
-import { Col } from 'react-bootstrap';
+import { Col, Spinner } from 'react-bootstrap';
+import Loader from '../Layout/Ui/Loader';
  
 const Login = ({ login, isAuth }) => {
 
@@ -14,7 +15,7 @@ const Login = ({ login, isAuth }) => {
        email: '',
        password: ''
     });
-
+    const [isLoading, setLoading] = useState(false);
     const { email,password } = formData;
 
     const onChange = e => setFormData({
@@ -22,9 +23,12 @@ const Login = ({ login, isAuth }) => {
        [e.target.name]: e.target.value
     })
 
-    const onSubmit = e =>  {
+    const onSubmit = async(e) =>  {
        e.preventDefault();
-        login({ email,password })
+       setLoading(true);
+       await login({ email,password })
+       setLoading(false);
+
     }
 
     if(isAuth){
@@ -70,7 +74,8 @@ const Login = ({ login, isAuth }) => {
               />
               <Alert name="password" />
             </div>
-            <input type="submit" className="btn btn-primary btn-rounded btn-block" value="Login" />
+            <input type="submit" className="btn btn-primary btn-rounded btn-block"  disabled={isLoading} value="Login" />
+            {isLoading ? ( <Loader /> ) : ''}
           </form>
         <p className="my-1 mt-3">
           Don't have an account? <a href="/register">Sign Up</a>

@@ -3,6 +3,8 @@ import Upload from '../Upload/Upload';
 import cx from './Images.module.css';
 import cs from './../../containers/FolderContainer/FolderContainer.module.css';
 import { Row } from 'react-bootstrap';
+import ReactFancyBox from 'react-fancybox'
+import 'react-fancybox/lib/fancybox.css'
 
 const Images = (props) => {
 
@@ -30,7 +32,7 @@ const Images = (props) => {
    return (
     <Fragment>
   
-    { props.dropzone ?  ( <Upload type={props.type} path={nodeTreeFiles.path}  /> ) : '' }
+    { props.dropzone ?  ( <Upload type={nodeTreeFiles.root} path={nodeTreeFiles.path}  /> ) : '' }
 
     <Row className="mt-3">
         {
@@ -87,7 +89,10 @@ const Images = (props) => {
                       (
                           <Fragment>
                             <div className={ cx.image }  >
-                                <img src={ file.filePath } alt="img" className="img-fluid" />
+                        
+                                <ReactFancyBox
+                                thumbnail={file.filePath}
+                                image={file.filePath}/>
                             </div>
                             <div className={ cx.file_name }>
                                 <span className="m-b-5 text-muted">{ file.name }</span>

@@ -16,6 +16,16 @@ body{
   border-radius: .55rem;
 }
 
+.loader{
+  position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    opacity: 0.7;
+}
+
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle
 {
   background-color:#a134d4;
@@ -108,6 +118,10 @@ section.content {
     padding: 10px;
 
 }
+.content{
+  position:relative;
+}
+
 .block-header {
     padding: 10px 0;
     color: #616161;
@@ -450,4 +464,10 @@ section.content {
 .file:hover .hover {
   display:block;
   transition:all 0.2s ease-in-out
+}
+
+.react-fancybox .image-box:hover{
+  z-index: 9999;
+  background-color: green;
+  opacity: 1;
 }
