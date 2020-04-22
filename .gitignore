@@ -1,2 +1,7 @@
 node_modules
+<<<<<<< HEAD
 client/public/uploads
+=======
+client/public/uploads
+uploads/user_files
+>>>>>>> 82b9435ba0abcabf025efec809c4cec7d3cb253f

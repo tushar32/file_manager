@@ -5,15 +5,17 @@ import { connect } from "react-redux";
 import Images from './../../components/Images/Images';
 
 import Actions from './../../components/Upload/Actions';
+
 import { getFiles,saveFile,readFile, createDocument,deleteFile, createFolder,renameFolder, deleteFolder } 
-   from './../../actions/nodeStructure';
+from './../../actions/nodeStructure';
 import Loader from './../../components/Layout/Ui/Loader'
 import { Modal, Form, Toast } from 'react-bootstrap';
     
 
-const FolderContainer = ({  files : { nodeTreeFiles, loading }, 
+const FolderContainer = ({  files : { nodeTreeFiles, loading },
     deleteFile, createFolder, renameFolder,createDocument,readFile,saveFile,
      deleteFolder,getFiles  }) => {
+
 
     const path = nodeTreeFiles ? nodeTreeFiles.path : null;
     const current_path = nodeTreeFiles? nodeTreeFiles.current_path : null;
@@ -75,12 +77,13 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
 
     const handleShowFile = async (e,fileName, filePath) => {
         e.preventDefault()
-       
+
         const data = await readFile({ fileName,filePath});
          console.log('datasdsafsd',data);
          
         setFileContent({ isOpen: true,content: data.data.data, name: fileName, path: filePath })
         setShow(true)
+          readFile({ current_path, path,filePath})
       }
 
       const handleClose = () => setShow(false);
@@ -156,8 +159,6 @@ FolderContainer.propTypes = {
     createDocument: PropTypes.func.isRequired,
     readFile: PropTypes.func.isRequired ,
     saveFile: PropTypes.func.isRequired ,
-
-    
 }
 
 const mapStateToProps = state => ({
