@@ -5,9 +5,6 @@ import {
 } from './types';
 import axios from 'axios';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 export const getNodeTree = () => async dispatch => {
     try {
         const res = await axios.get('/api/node-tree');
