@@ -8,7 +8,7 @@ import Actions from './../../components/Upload/Actions';
 import { getFiles,saveFile,readFile, createDocument,deleteFile, createFolder,renameFolder, deleteFolder } 
    from './../../actions/nodeStructure';
 import Loader from './../../components/Layout/Ui/Loader'
-import { Modal, Form } from 'react-bootstrap';
+import { Modal, Form, Toast } from 'react-bootstrap';
     
 
 const FolderContainer = ({  files : { nodeTreeFiles, loading }, 
@@ -21,6 +21,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     const [ dropzone, setDropzone ] = useState(false);
     const [ fileContent, setFileContent ] = useState({ isOpen: false, content:'' , name: '',path });
     const [show, setShow] = useState(true);
+    const [toastShow, setToastShow] = useState(true);
     const [keyStoke, setKeyStroke] = useState('');
 
     const handleChange = (e) => {
@@ -55,6 +56,14 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
         }
     }
 
+    const handleRenameFile = (e,old_name) => {
+       
+        if(e.keyCode === 13){
+            const new_name =  e.target.value;
+            renameFolder({old_name, current_path, path, new_name })
+        }
+    }
+
     const handleGoToFolder = (e, folder_name) => {
        
         getFiles(current_path + '/'+folder_name )
@@ -76,15 +85,14 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
 
       const handleClose = () => setShow(false);
     
-      const handleSaveFile = (e) => {
+      const handleSaveFile = async (e) => {
         e.preventDefault();
-        console.log(e.key);
         setKeyStroke(e.key);
-        console.log('keyStoke',keyStoke);
 
         if( (keyStoke == 'Control' && e.key =='.' ) || (keyStoke == '.' && e.key =='Control'  )){
             
-            saveFile(e.target.value,fileContent.path);
+           await saveFile(e.target.value,fileContent.path);
+           setToastShow(true) 
             
         }
       }
@@ -95,6 +103,7 @@ return loading && nodeTreeFiles === null ?  (
         <Fragment>
 
             { fileContent.isOpen ? (
+                <Fragment>
                <Modal show={show} onHide={handleClose}>
                <Modal.Header closeButton>
                  <Modal.Title>{fileContent.name}</Modal.Title>
@@ -107,6 +116,18 @@ return loading && nodeTreeFiles === null ?  (
                </Modal.Body>
               
              </Modal>
+
+                <Toast style={{
+                    position: 'absolute',
+                    top: '0',
+                    right: 0,
+                    backgroundColor: 'green',
+                    zIndex:9999
+                    }}
+                    onClose={() => setToastShow(false)} show={toastShow} delay={3000} autohide>
+                    <Toast.Body>file saved successfully!</Toast.Body>
+                </Toast>
+           </Fragment>
             ) : ''
             }
             <Actions type={ nodeTreeFiles.root } newFolder={ handleCreateFolder } 
@@ -115,6 +136,7 @@ return loading && nodeTreeFiles === null ?  (
           <Images nodeTreeFiles={ nodeTreeFiles }  delete={ handlerDeleteFile }
                 deleteDir={ handlerDeleteFolder }
                 rename={ handleRenameFolder }
+                renameFile={ handleRenameFile }
                 goToFolder={ handleGoToFolder }
                 newDocument={ handleNewDocument }
                 showFile={ handleShowFile }

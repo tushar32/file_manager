@@ -15,6 +15,7 @@
 overflow: hidden;
 background-size: cover;
 background-position: top;
+cursor: pointer;
 }
 .file_name {
    padding:10px;

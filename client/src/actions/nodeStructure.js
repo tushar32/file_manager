@@ -5,6 +5,9 @@ import {
 } from './types';
 import axios from 'axios';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const getNodeTree = () => async dispatch => {
     try {
         const res = await axios.get('/api/node-tree');
@@ -155,8 +158,9 @@ export const saveFile = (fileContent, filePath ) => async dispatch => {
     }
       const data = JSON.stringify({ fileContent, filePath })
     try {
-        return await axios.post('/api/node-tree/save-file',data,options);
-            
+       return await axios.post('/api/node-tree/save-file',data,options);
+        
+        
     } catch (error) {
         
     }

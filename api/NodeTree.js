@@ -154,7 +154,7 @@ router.post('/save-file',auth, async(req, res) => {
   try {
     fs.writeFile(filePath,req.body.fileContent ,(err) => {
       if (err) console.log(err);
-      console.log("Successfully Written to File.");
+      res.status(200).json({ "msg" : "file saved successfully" })
     } );
 
   } catch (error) {
@@ -162,9 +162,7 @@ router.post('/save-file',auth, async(req, res) => {
         res.status(500).send(err);
   }
   
-
-
-    res.status(200).json({ "msg" : "file read successfully",data : data })
+   
 });
 
 module.exports = router;

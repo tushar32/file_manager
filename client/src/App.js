@@ -10,22 +10,24 @@ import store from './store';
 
 import setAuthToken from './utils/setAuthToken';
 
+
 if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 
+
 const  App = () => {
+ 
 
   useEffect( () => {
     store.dispatch(loadUser())
   },[]);
 
   return(    
-
     <Provider store={store}>
       <Fragment>
         <Router>
-          <Switch>  
+          <Switch>
             <Route component={Routes} />
           </Switch>
         </Router>
