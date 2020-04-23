@@ -11,7 +11,8 @@ class Upload extends Component {
     super(props);
      this.fileExt = {
         'images' :  ['image/webp','image/jpeg','image/jpg','image/png','image/gif'],
-        'documents' : [ 'text/plain','txt','xlsx']
+        'documents' : [ 'text/plain','txt','xlsx'],
+        'audios' : ['audio/mpeg']
     };
 
     this.state = {
@@ -36,7 +37,7 @@ class Upload extends Component {
      
       
       for(var i=0;i<files.length;i++){
-        console.log('fdfsf',files[i]);
+        
         if(this.fileExt[this.props.type].includes(files[i].type))
           fileArray.push(files[i])
       }

@@ -75,6 +75,10 @@ router.post('/rename-folder',auth, async(req, res) => {
   const oldFolder = appPath+"/"+file_path+"/"+req.body.path+"/"+ req.body.old_name;
   console.log('newFolder',newFolder);
   
+  if(fs.existsSync(newFolder)){
+    res.status(400).json({ "msg" : "Directory already exists" })
+  }
+
   fs.rename(oldFolder, newFolder, function(err) {
     if (err) {
       console.log(err)
