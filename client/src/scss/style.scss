@@ -24,6 +24,10 @@ body{
     right: 0;
     background: white;
     opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:9999
 }
 
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle
@@ -458,14 +462,20 @@ section.content {
     transition:all 0.2s ease-in-out
     }
   }
-  .file:hover{
-    opacity: 0.8;
-  }
+ 
 .file:hover .hover {
   display:block;
   transition:all 0.2s ease-in-out
 }
 
+.react-fancybox .box{
+  z-index: 9999;
+  opacity: 1;
+}
+.react-fancybox .box:hover{
+  z-index: 9999;
+  opacity: 1;
+}
 .react-fancybox .image-box:hover{
   z-index: 9999;
   background-color: green;

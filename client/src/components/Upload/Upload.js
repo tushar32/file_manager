@@ -90,7 +90,9 @@ class Upload extends Component {
    return (
      <Fragment>
        { this.state.uploadStatus ? 
-        <Spinner animation="border" variant="primary" />
+        <div className="loader">
+            <Spinner animation="border" variant="primary" />
+          </div>
         : 
         <Card className="mt-3" >
         <div className={ cx.Body }>
