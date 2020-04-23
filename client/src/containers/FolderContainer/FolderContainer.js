@@ -8,8 +8,7 @@ import Actions from './../../components/Upload/Actions';
 
 import { getFiles,saveFile,readFile, createDocument,deleteFile, createFolder,renameFolder, deleteFolder } 
 from './../../actions/nodeStructure';
-import Loader from './../../components/Layout/Ui/Loader'
-import { Modal, Form, Toast } from 'react-bootstrap';
+import { Modal, Form, Toast, Spinner } from 'react-bootstrap';
     
 
 const FolderContainer = ({  files : { nodeTreeFiles, loading },
@@ -23,7 +22,7 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
     const [ dropzone, setDropzone ] = useState(false);
     const [ fileContent, setFileContent ] = useState({ isOpen: false, content:'' , name: '',path });
     const [show, setShow] = useState(true);
-    const [toastShow, setToastShow] = useState(true);
+    const [toastShow, setToastShow] = useState({ status:false, msg: '' });
     const [keyStoke, setKeyStroke] = useState('');
 
     const handleChange = (e) => {
@@ -32,10 +31,12 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
         setFileContent({ ...fileContent, content: e.target.value  })
     }
 
-    const handlerDeleteFile = (e,file_name) => {
+    const handlerDeleteFile = async (e,file_name) => {
 
        if( window.confirm('Are you sure want to delete a file?')) {
-            deleteFile({ file_name,current_path, path })
+            await deleteFile({ file_name,current_path, path });
+            setToastShow({status:true, msg:'File Saved Successfully' }) 
+
        }
     }
 
@@ -58,12 +59,12 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
         }
     }
 
-    const handleRenameFile = (e,old_name) => {
+    const handleRenameFile =async (e,old_name) => {
        
         if(e.keyCode === 13){
             const new_name =  e.target.value;
-            renameFolder({old_name, current_path, path, new_name })
-        }
+           await renameFolder({old_name, current_path, path, new_name })
+           setToastShow({status:true, msg:'File Rename Successfully' })         }
     }
 
     const handleGoToFolder = (e, folder_name) => {
@@ -95,13 +96,23 @@ const FolderContainer = ({  files : { nodeTreeFiles, loading },
         if( (keyStoke == 'Control' && e.key =='.' ) || (keyStoke == '.' && e.key =='Control'  )){
             
            await saveFile(e.target.value,fileContent.path);
-           setToastShow(true) 
+           setToastShow({status:true, msg:'File Saved Successfully' }) 
             
         }
       }
 
+      const handleGoBack = () => {
+       // const newPath = current_path.split('/').pop().join('/');
+        console.log('newPath',current_path.split('/').slice(0, -1).join('/'));
+
+        getFiles(current_path.split('/').slice(0, -1).join('/'))
+      }
+
 return loading && nodeTreeFiles === null ?  (
-    <Loader />
+    <div className="loader">
+        <Spinner animation="border" variant="primary" />
+    </div>
+    
 ) : (
         <Fragment>
 
@@ -120,20 +131,11 @@ return loading && nodeTreeFiles === null ?  (
               
              </Modal>
 
-                <Toast style={{
-                    position: 'absolute',
-                    top: '0',
-                    right: 0,
-                    backgroundColor: 'green',
-                    zIndex:9999
-                    }}
-                    onClose={() => setToastShow(false)} show={toastShow} delay={3000} autohide>
-                    <Toast.Body>file saved successfully!</Toast.Body>
-                </Toast>
+                
            </Fragment>
             ) : ''
             }
-            <Actions type={ nodeTreeFiles.root } newFolder={ handleCreateFolder } 
+            <Actions type={ nodeTreeFiles.root } goBack={handleGoBack } newFolder={ handleCreateFolder } 
             click= { () =>  { setDropzone(!dropzone) } } newDocument={ handleNewDocument } />
 
           <Images nodeTreeFiles={ nodeTreeFiles }  delete={ handlerDeleteFile }
@@ -144,6 +146,23 @@ return loading && nodeTreeFiles === null ?  (
                 newDocument={ handleNewDocument }
                 showFile={ handleShowFile }
                 dropzone={ dropzone } />
+                
+            { toastShow.status ?
+            (
+                <Toast style={{
+                    position: 'absolute',
+                    top: '0',
+                    right: 0,
+                    backgroundColor: 'green',
+                    zIndex:9999
+                    }}
+                    onClose={() => setToastShow({ ...toastShow,status:false })} show={toastShow.status} delay={3000} autohide>
+                    <Toast.Body>{ toastShow.msg}!</Toast.Body>
+                </Toast>
+            )
+             : ''
+            }
+                
         </Fragment>
     )   
     

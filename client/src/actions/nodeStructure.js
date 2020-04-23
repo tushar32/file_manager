@@ -163,4 +163,20 @@ export const saveFile = (fileContent, filePath ) => async dispatch => {
     }
 };
 
+export const goBack = (current_path) => async dispatch => {
+   
+    const options = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+      const newPath = current_path.split('/').slice().join('/');
+
+    try {
+        dispatch(getFiles(newPath));
+            
+    } catch (error) {
+        
+    }
+};
 

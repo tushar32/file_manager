@@ -4,7 +4,7 @@ const auth = require('./../middleware/auth');
 const User = require('../models/User');
 const nodeTree = require('../utils/index').NTreeUtil;
 const fs = require('fs');
-const { file_path } = require('./../config/config');
+const { file_path, rootNodes } = require('./../config/config');
 const path = require('path');
 
 
@@ -92,6 +92,10 @@ router.post('/delete-folder',auth, async(req, res) => {
   //await fs.unlink(file_path+"/"+req.body.path)
  console.log('body.path',req.body.path);
  
+  if(rootNodes.includes(req.body.folder_name))
+    res.status(400).json({ "msg" : "Root folder cannot be deleted" })
+
+
   const delete_path = appPath+"/"+file_path+"/"+req.body.path+"/" +req.body.folder_name
   console.log(delete_path);
   
@@ -161,8 +165,6 @@ router.post('/save-file',auth, async(req, res) => {
        console.error(err);
         res.status(500).send(err);
   }
-  
-   
 });
 
 module.exports = router;

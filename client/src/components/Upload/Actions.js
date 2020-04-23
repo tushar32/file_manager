@@ -2,8 +2,7 @@ import React, { Fragment } from 'react';
 import cx from './Actions.module.css';
 import { Button } from 'react-bootstrap';
  
-const Actions = (prop) => {
-    console.log('action',prop);
+const Actions = (prop) => { 
     const { type } = prop;
    return (
        <Fragment>
@@ -18,7 +17,7 @@ const Actions = (prop) => {
                         New Folder
                     </Button>
                     {' '}
-                    <Button  key="3" className="float-right" onClick={ prop.newFolder }>
+                    <Button  key="3" className="float-right" onClick={ prop.goBack }>
                     <i className="far fa-arrow-alt-circle-left"></i>
                     </Button>
 

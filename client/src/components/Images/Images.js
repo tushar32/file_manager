@@ -53,15 +53,14 @@ const Images = (props) => {
                                  <div className="m-b-5 text-center" onBlur={ () => setRenameDir(!renameDir)}>
                                      
                                      { renameDir.id === folder.id ? 
-                                     <input type="text"   onChange={e => handleChange(e)} value={ folderText.value } 
-                                      id={folder.id} style={{ display: renameDir }} onKeyDown={ e => props.rename(e,folder.name) } />
-                                      : 
-                                        
-                                     
+                                        <input type="text"   onChange={e => handleChange(e)} value={ folderText.value } 
+                                        id={folder.id} style={{ display: renameDir }} onKeyDown={ e => props.rename(e,folder.name) } />
+                                        : 
+                                    
                                         <button className="link-button" data_id={folder.id}  
                                         onClick={ (e) => handleToggleDir(e, 'folder',folder.id, folder.name)} >
-                                     
-                                        { folder.name }</button> 
+                                            { folder.name }
+                                        </button> 
                                     }
                                     
                                   </div>

@@ -10,7 +10,7 @@ exports.getStreams = async function( user, node = ''){ // default node = ''  is 
     const appPath =  path.resolve(process.cwd());
     const folderPath = appPath+"/"+file_path+"/"+user.name.replace(" ","_")+'_'+user.id+'/'+node;
 
-    console.log(folderPath);
+   // console.log(folderPath);
     
     const settings = {
         // Filter files with js and json extension
@@ -24,7 +24,7 @@ exports.getStreams = async function( user, node = ''){ // default node = ''  is 
     
     // Iterate recursively through a folder
    const streams = await readdirp.promise(folderPath,settings);
-     console.log('streams',streams);
+    // console.log('streams',streams);
      
      streams.map(file => {
 
@@ -77,7 +77,7 @@ exports.getStreams = async function( user, node = ''){ // default node = ''  is 
 exports.getChildrenStreams = async function (user , nodePath){
   const appPath =  path.resolve(process.cwd());
   const folderPath = appPath+"/"+file_path+"/"+user.name.replace(" ","_")+'_'+user.id+'/'+nodePath;
-//console.log(folderPath);
+console.log('folderPath',folderPath);
 
   let root = nodePath.split('/').shift();
   

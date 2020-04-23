@@ -2,7 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route,Switch }  from 'react-router-dom';
 import './scss/style.scss';
 import Routes from './components/Routes/Routes';
-import { loadUser } from './actions/auth'
+import { loadUser } from './actions/auth';
+import { getFiles } from './actions/nodeStructure';
+
 
 //Redux
 import { Provider } from 'react-redux';
@@ -21,6 +23,7 @@ const  App = () => {
 
   useEffect( () => {
     store.dispatch(loadUser())
+    store.dispatch(getFiles('/'))
   },[]);
 
   return(    

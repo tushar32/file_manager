@@ -8,8 +8,6 @@ import { Col, Spinner } from 'react-bootstrap';
 import Loader from '../Layout/Ui/Loader';
  
 const Login = ({ login, isAuth }) => {
-
-  console.log('isAuth',isAuth);
   
     const [formData, setFormData ] = useState({
        email: '',
