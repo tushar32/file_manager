@@ -7,7 +7,7 @@ const fileUploads = require('./../middleware/file-upload');
 //@route POST  api/upload
 //@desc Upload file of user
 
-router.post('/',async function  (req, res) {
+router.put('/',async function  (req, res) {
 
   
   fileUploads(req, res, function(err) {

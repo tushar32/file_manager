@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Card, Spinner} from 'react-bootstrap';
+import { Button, Card, Spinner, ProgressBar} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { upload } from './../../actions/upload';
 import cx from './Upload.module.css';
+import axios from 'axios';
+//import uuid from 'react-uuid';
 
 class Upload extends Component {
 
@@ -18,8 +20,17 @@ class Upload extends Component {
     this.state = {
       files: [],
       uploadStatus: false,
-      highlight : false
+      highlight : false,
+      uploadProgress: {
+        uploadStatus:false,
+       1 : {
+          id:1,
+          file: '',
+          progress: 0,
+        }
+       }
     }
+    this.percentCompleted = 0;
     this.fileInputRef = React.createRef();
   }
 
@@ -29,15 +40,14 @@ class Upload extends Component {
     const fileArray = this.fileAddedArray(files);
     this.setState(prevState => ({
       files: prevState.files.concat(fileArray)
-    }));
+    })
+    );
   }
 
   fileAddedArray(files){
       const fileArray = [];
-     
       
       for(var i=0;i<files.length;i++){
-        
         if(this.fileExt[this.props.type].includes(files[i].type))
           fileArray.push(files[i])
       }
@@ -67,22 +77,57 @@ class Upload extends Component {
      let data = new FormData();
      data.append('path', this.props.path);
      // for data can't be visible in console log
-     this.state.files.forEach(file => {
+
+     this.state.files.forEach((file,index) => {
       data.append('file', file);
       data.append('name', file.name);
-     
+
+      var config = {
+        onUploadProgress: function(progressEvent) {
+           const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+console.log('percentCompleted',percentCompleted);
+
+           if(percentCompleted == 100) {
+            let files = [ ...this.state.files ];
+            files.splice(index,1);
+            
+            this.setState({ files : files })
+
+           } else {
+            this.setState({
+              uploadProgress:{ 
+                ...this.state.uploadProgress,
+                uploadStatus:true,
+                [index]: { 
+                  id: index,
+                  file:file, 
+                  progress: percentCompleted 
+                 } 
+              }
+            })
+           }
+         
+        }.bind(this)
+      };
+      
+        axios.put('/api/upload',data, config)
+        .then(function (res) {
+          
+        })
+        .catch(function (err) {
+        
+        });
+     // this.props.upload(data, this.props.path);
      })
-
-     this.props.upload(data, this.props.path);
  
-  }
-
+  } 
+   
   removeFile = (e,fileIndex) => {
     e.stopPropagation();
     let files = [ ...this.state.files ];
-   
-    const new_files = files.splice(1,fileIndex);
-    this.setState({ files : new_files })
+    files.splice(fileIndex,1);
+    
+    this.setState({ files : files })
     
   }
   
@@ -90,11 +135,6 @@ class Upload extends Component {
 
    return (
      <Fragment>
-       { this.state.uploadStatus ? 
-        <div className="loader">
-            <Spinner animation="border" variant="primary" />
-          </div>
-        : 
         <Card className="mt-3" >
         <div className={ cx.Body }>
          <div className="Upload"  
@@ -121,8 +161,8 @@ class Upload extends Component {
            <div className="Files" >
              {
                this.state.files ? this.state.files.map((file,index) => {
-               console.log(file);
-               
+               console.log('this.percentCompleted',this.percentCompleted);
+                let id;
                  let src = '';
                    if(this.fileExt['images'].includes(file.type) ){
                      src = URL.createObjectURL(file)
@@ -149,7 +189,19 @@ class Upload extends Component {
                                  <i className="far fa-times-circle fa-3x" 
                              ></i> </button>
                            </div>
+                         
                          </div>
+                         
+                         { this.state.uploadProgress.uploadStatus
+                         && Object.values(this.state.uploadProgress)[index] !== undefined ?
+                          ( 
+                            <div className="m-t">
+                              <ProgressBar striped  key={index} variant="warning" now={ Object.values(this.state.uploadProgress)[index].progress } /> 
+                            </div>
+                           ) 
+                          :''
+                         }
+                         
                        {/* { this.renderProgress(file)} */}
                      </div>
                  )
@@ -165,7 +217,7 @@ class Upload extends Component {
           </div>
        </Card>
       
-      }
+     
      </Fragment>
    
     )
