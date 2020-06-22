@@ -28,7 +28,7 @@ const  App = () => {
   return(    
     <Provider store={store}>
       <Fragment>
-        <Router basename={'client'}>
+        <Router>
           <Switch>
             <Route component={Routes} />
           </Switch>
