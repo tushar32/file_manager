@@ -64,9 +64,6 @@ const NodeTreeContainer = ({  nodeStructure : { nodeTree, loading } , getNodeTre
 //             }
 //         ]
 //     }
-// ];
-console.log('nodeTree',nodeTree);
-console.log('loading',loading);
 
 
 return loading && nodeTree === null ?  (

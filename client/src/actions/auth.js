@@ -20,7 +20,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get('/api/auth');
+        const res = await axios.get(process.env.REACT_APP_API_ENDPOINT+'/api/auth');
         
         dispatch({
             type: USER_LOADED,
@@ -45,7 +45,7 @@ export const register = ({ name,email,password }) => async dispatch => {
     const body = JSON.stringify({ name,email,password });
     
     try {
-        const res = await axios.post('/api/auth/register', body, options)
+        const res = await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/register', body, options)
 
         console.log('res.data',res.data);
         
@@ -76,13 +76,13 @@ export const login  = ({ email,password }) => async dispatch => {
         headers: {
             'Content-Type' : 'application/json'
         }
-    }
-
+    } 
     const body = JSON.stringify({ email,password });
 
     try {
-        const res = await axios.post('/api/auth/login', body, options)
-
+        const res = await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/login', body, options)
+   console.log(res.data);
+   
         dispatch({
             type:LOGIN_SUCCESS,
             payload: res.data
