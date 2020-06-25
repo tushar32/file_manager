@@ -1,8 +1,14 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const cors = require('cors');
+
+const https = require('https');
+const http = require('http');
 
 const app = express();
+app.use(cors());
+
 console.log(' Express Server connected')
 
 //connect database
@@ -30,6 +36,32 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
+
+    // Certificate
+    ssl_certificate /home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert;
+        ssl_certificate_key /home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key;
+
+        
+    const privateKey = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key', 'utf8');
+    const certificate = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert', 'utf8');
+
+    const credentials = {
+      key: privateKey,
+      cert: certificate
+    };
+
+        // Starting both http & https servers
+    const httpServer = http.createServer(app);
+    const httpsServer = https.createServer(credentials, app);
+
+    httpServer.listen(80, () => {
+      console.log('HTTP Server running on port 80');
+    });
+
+    httpsServer.listen(443, () => {
+      console.log('HTTPS Server running on port 443');
+    });
+
 }
   
 

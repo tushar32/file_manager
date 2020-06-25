@@ -85,7 +85,6 @@ class Upload extends Component {
       var config = {
         onUploadProgress: function(progressEvent) {
            const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-console.log('percentCompleted',percentCompleted);
 
            if(percentCompleted == 100) {
             let files = [ ...this.state.files ];
