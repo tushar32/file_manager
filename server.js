@@ -62,6 +62,9 @@ if (process.env.NODE_ENV === 'production') {
       console.log('HTTPS Server running on port 443');
     });
 
+    const PORT = process.env.PORT || 443;
+
+
 }
   
 
