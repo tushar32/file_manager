@@ -38,10 +38,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 
     // Certificate
-    ssl_certificate /home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert;
-        ssl_certificate_key /home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key;
-
-        
     const privateKey = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key', 'utf8');
     const certificate = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert', 'utf8');
 
