@@ -8,6 +8,7 @@ import {
     SET_ALERT
  } from './types';
 import axios from 'axios';
+import https from 'https';
 
 import setAuthToken from '../utils/setAuthToken';
 
@@ -72,11 +73,20 @@ export const register = ({ name,email,password }) => async dispatch => {
 }
 
 export const login  = ({ email,password }) => async dispatch => {
+
+    const agent = new https.Agent({  
+        rejectUnauthorized: false
+      });
+
     const options = {
         headers: {
             'Content-Type' : 'application/json'
-        }
+        },
+        httpsAgent:agent
     } 
+
+    
+
     const body = JSON.stringify({ email,password });
 
     try {
