@@ -50,7 +50,8 @@ if (environment === 'production') {
       key: privateKey,
       cert: certificate
     };
-
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    
     const httpsServer = https.createServer(credentials, app);
 
     httpsServer.listen(5000, () => {
