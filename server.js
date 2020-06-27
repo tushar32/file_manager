@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config();
 
 const https = require('https');
 const http = require('http');
@@ -28,8 +29,11 @@ app.use('/api/auth',auth);
 app.use('/api/node-tree',NodeTree);
 app.use('/api/upload',upload);
 
+console.log(process.env.NODE_ENV);
+
+var environment = process.env.NODE_ENV || 'production';
 // Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
+if (environment === 'production') {
     // Set static folder
     app.use(express.static(path.join(__dirname, 'client/build')));
   
@@ -49,8 +53,9 @@ if (process.env.NODE_ENV === 'production') {
     const httpsServer = https.createServer(credentials, app);
 
     httpsServer.listen(5000, () => {
-      console.log('HTTPS Server running on port 443');
+      console.log('HTTPS Server running on port 5000');
     });
+
 } else {
   const PORT = process.env.PORT || 5000;
   console.log(PORT);
