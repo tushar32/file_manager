@@ -55,11 +55,9 @@ if (process.env.NODE_ENV === 'production') {
     httpsServer.listen(5000, () => {
       console.log('HTTPS Server running on port 443');
     });
-}
+} else {
+  const PORT = process.env.PORT || 5000;
+  console.log(PORT);
   
-
-
-const PORT = process.env.PORT || 5000;
-console.log(PORT);
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+}
