@@ -50,21 +50,11 @@ if (process.env.NODE_ENV === 'production') {
       cert: certificate
     };
 
-        // Starting both http & https servers
-    const httpServer = http.createServer(app);
     const httpsServer = https.createServer(credentials, app);
 
-    httpServer.listen(80, () => {
-      console.log('HTTP Server running on port 80');
-    });
-
-    httpsServer.listen(443, () => {
+    httpsServer.listen(5000, () => {
       console.log('HTTPS Server running on port 443');
     });
-
-    const PORT = process.env.PORT || 443;
-
-
 }
   
 
