@@ -8,8 +8,6 @@ import {
     SET_ALERT
  } from './types';
 import axios from 'axios';
-import https from 'https';
-
 import setAuthToken from '../utils/setAuthToken';
 
 export const loadUser = () => async dispatch => {
