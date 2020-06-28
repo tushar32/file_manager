@@ -74,18 +74,11 @@ export const register = ({ name,email,password }) => async dispatch => {
 
 export const login  = ({ email,password }) => async dispatch => {
 
-    const agent = new https.Agent({  
-        rejectUnauthorized: false
-      });
-
     const options = {
         headers: {
             'Content-Type' : 'application/json'
-        },
-        httpsAgent:agent
-    } 
-
-    
+        }
+    }
 
     const body = JSON.stringify({ email,password });
 
