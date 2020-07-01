@@ -10,6 +10,12 @@ import {
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
+console.log('localStorage.token',localStorage.token);
+
+ //setAuthToken will set the token in the header to send to /api/login
+        // It's helper function
+setAuthToken(localStorage.token)
+
 export const loadUser = () => async dispatch => {
 
     if(localStorage.token){

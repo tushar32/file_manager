@@ -12,8 +12,6 @@ import https from 'https';
         axios.defaults.headers.common['x-auth-token'] = token;
         axios.defaults.headers.common['Accept'] = 'application/json';
 
-    } else {
-        delete axios.defaults.headers.common['x-auth-token'];
     }
 
 }
