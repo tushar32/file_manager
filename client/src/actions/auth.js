@@ -16,7 +16,8 @@ console.log('localStorage.token',localStorage.token);
 
 const axiosInstance = axios.create({
     httpsAgent: new https.Agent({  
-      rejectUnauthorized: false
+        cert: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key'),
+        key: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert'),
     })
   });
 
@@ -33,7 +34,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get(process.env.REACT_APP_API_ENDPOINT+'/api/auth');
+        const res = await axiosInstance.get(process.env.REACT_APP_API_ENDPOINT+'/api/auth');
         
         dispatch({
             type: USER_LOADED,
