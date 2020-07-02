@@ -10,16 +10,8 @@ import {
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
-import https from 'https';
-
 console.log('localStorage.token',localStorage.token);
 
-const axiosInstance = axios.create({
-    httpsAgent: new https.Agent({  
-        cert: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key'),
-        key: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert'),
-    })
-  });
 
  //setAuthToken will set the token in the header to send to /api/login
         // It's helper function
@@ -34,7 +26,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const res = await axiosInstance.get(process.env.REACT_APP_API_ENDPOINT+'/api/auth');
+        const res = await axios.get(process.env.REACT_APP_API_ENDPOINT+'/api/auth');
         
         dispatch({
             type: USER_LOADED,
@@ -59,7 +51,7 @@ export const register = ({ name,email,password }) => async dispatch => {
     const body = JSON.stringify({ name,email,password });
     
     try {
-        const res = await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/register', body, options)
+        const res = await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/register', body, options)
 
         console.log('res.data',res.data);
         
@@ -96,7 +88,7 @@ export const login  = ({ email,password }) => async dispatch => {
     const body = JSON.stringify({ email,password });
 
     try {
-        const res = await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/login', body, options)
+        const res = await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/login', body, options)
    console.log(res.data);
    
         dispatch({
