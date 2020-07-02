@@ -109,14 +109,14 @@ class Upload extends Component {
         }.bind(this)
       };
       
-        axios.put('/api/upload',data, config)
-        .then(function (res) {
+        // axios.put('/api/upload',data, config)
+        // .then(function (res) {
           
-        })
-        .catch(function (err) {
+        // })
+        // .catch(function (err) {
         
-        });
-     // this.props.upload(data, this.props.path);
+        // });
+      this.props.upload(data, this.props.path);
      })
  
   } 
