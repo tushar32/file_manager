@@ -59,7 +59,7 @@ export const register = ({ name,email,password }) => async dispatch => {
     const body = JSON.stringify({ name,email,password });
     
     try {
-        const res = await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/register', body, options)
+        const res = await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/auth/register', body, options)
 
         console.log('res.data',res.data);
         

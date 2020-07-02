@@ -5,9 +5,17 @@ import {
 } from './types';
 import axios from 'axios';
 
+
+const axiosInstance = axios.create({
+    httpsAgent: new https.Agent({  
+        cert: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key'),
+        key: fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert'),
+    })
+  });
+  
 export const getNodeTree = () => async dispatch => {
     try {
-        const res = await axios.get(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree');
+        const res = await axiosInstance.get(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree');
 
         dispatch({
             type: ALL_NODES,
@@ -28,7 +36,7 @@ export const getFiles = (path) => async dispatch => {
             type: NO_FILES
         });
 
-        const res = await axios.get(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/files?path='+path);
+        const res = await axiosInstance.get(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/files?path='+path);
         dispatch({
             type: IMAGE_FILES,
             payload: res.data
@@ -47,7 +55,7 @@ export const deleteFile = ({ file_name,current_path, path }) => async dispatch =
     }
       const data = JSON.stringify({ file_name, path })
     try {
-        await axios.post('/api/node-tree/delete',data,options);
+        await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/delete',data,options);
 
         dispatch(getFiles(current_path));
             
@@ -65,7 +73,7 @@ export const createFolder = ({ file_name,current_path, path }) => async dispatch
     }
       const data = JSON.stringify({ file_name, path })
     try {
-        await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/create-folder',data,options);
+        await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/create-folder',data,options);
 
         dispatch(getFiles(current_path));
             
@@ -83,7 +91,7 @@ export const renameFolder = ({ old_name,current_path, path,new_name }) => async 
     }
       const data = JSON.stringify({old_name, new_name,current_path,path })
     try {
-        await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/rename-folder',data,options);
+        await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/rename-folder',data,options);
 
         dispatch(getFiles(current_path));
         dispatch(getNodeTree());
@@ -102,7 +110,7 @@ export const deleteFolder = ({ folder_name,current_path, path }) => async dispat
     }
       const data = JSON.stringify({ folder_name,current_path, path })
     try {
-        await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/delete-folder',data,options);
+        await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/delete-folder',data,options);
 
         dispatch(getFiles(current_path));
         dispatch(getNodeTree());
@@ -121,7 +129,7 @@ export const createDocument = ({ file_name,current_path, path }) => async dispat
     }
       const data = JSON.stringify({ file_name, path })
     try {
-        await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/new-document',data,options);
+        await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/new-document',data,options);
 
         dispatch(getFiles(current_path));
             
@@ -139,7 +147,7 @@ export const readFile = ({ fileName, filePath }) => async dispatch => {
     }
       const data = JSON.stringify({ filePath, fileName })
     try {
-        return await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/read-file',data,options);
+        return await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/read-file',data,options);
             
     } catch (error) {
         
@@ -155,7 +163,7 @@ export const saveFile = (fileContent, filePath ) => async dispatch => {
     }
       const data = JSON.stringify({ fileContent, filePath })
     try {
-       return await axios.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/save-file',data,options);
+       return await axiosInstance.post(process.env.REACT_APP_API_ENDPOINT+'/api/node-tree/save-file',data,options);
         
         
     } catch (error) {
