@@ -15,6 +15,7 @@ console.log(' Express Server connected')
 //connect database
 connectDB();
 
+
 app.use('/uploads/user_files', express.static(path.join('uploads', 'user_files')));
 
 // Init Middleware
@@ -45,7 +46,7 @@ if (environment === 'production') {
     const privateKey = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.key', 'utf8');
     const certificate = fs.readFileSync('/home/jagatgururampalji/domains/filemanager.jagatgururampalji.org/ssl.cert', 'utf8');
 
-    const credentials = {
+    const credentials = { 
       key: privateKey,
       cert: certificate
     };
@@ -59,6 +60,6 @@ if (environment === 'production') {
 } else {
   const PORT = process.env.PORT || 5000;
   console.log(PORT);
-  
+
   app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }

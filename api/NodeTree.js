@@ -146,9 +146,6 @@ router.post('/read-file',auth, async(req, res) => {
         res.status(500).send(err);
   }
   
-
-
-  
 });
 
 router.post('/save-file',auth, async(req, res) => {

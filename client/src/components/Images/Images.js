@@ -83,7 +83,7 @@ const Images = (props) => {
         
                 <ReactFancyBox
                 thumbnail={file.filePath}
-                image={file.filePath}/>
+                image={process.env.REACT_APP_API_ENDPOINT+"/"+file.filePath}/>
             </div>
             <div className={ cx.file_name }>
                 <span className="m-b-5 text-muted">{ file.name }</span>
