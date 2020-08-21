@@ -10,7 +10,7 @@ const AdminLayout = ({ children }) =>
           <div className="container-fluid">
             <Header />
             <div className="content">
-            { children }
+              { children }
             </div>
           </div>
       </section>
