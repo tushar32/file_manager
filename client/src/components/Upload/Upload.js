@@ -79,6 +79,8 @@ class Upload extends Component {
      // for data can't be visible in console log
 
      this.state.files.forEach((file,index) => {
+       console.log('file',file);
+       
       data.append('file', file);
       data.append('name', file.name);
 
@@ -116,6 +118,9 @@ class Upload extends Component {
         // .catch(function (err) {
         
         // });
+
+        console.log('datatus',data);
+        
       this.props.upload(data, this.props.path);
      })
  

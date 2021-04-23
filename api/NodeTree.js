@@ -16,7 +16,6 @@ router.get('/',auth,async (req, res) => {
   let user = await User.findById(req.user.id).select('-password');
 
   const rootDirArr = await nodeTree.getStreams(user,'');
-  console.log('final',rootDirArr);
 
     return res.status(200).json(rootDirArr);
 });
@@ -28,7 +27,6 @@ router.get('/files',auth,async (req, res) => {
   
   const path = req.query.path;
   const rootDirArr = await nodeTree.getChildrenStreams(user,path);
-//  console.log('final',rootDirArr);
 
     return res.status(200).json(rootDirArr);
 });
@@ -59,9 +57,13 @@ router.post('/create-folder',auth, async(req, res) => {
   const folder = appPath+"/"+file_path+"/"+req.body.path+"/new_folder"
   console.log(folder);
   
-  if (!fs.existsSync(folder)){
-    fs.mkdirSync(folder);
-  }
+  try {
+    if (!fs.existsSync(folder)){
+      fs.mkdirSync(folder);
+    }
+  } catch (error) {
+    
+  } 
 
     res.status(200).json({ "msg" : "folder created successfully" })
 });

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import AdminLayout from './../Layout/Admin/AdminLayout';
+import { useSelector } from "react-redux";
 
-const PrivateRoute = ({ component: Component,auth: { token },...rest }) => (
+const PrivateRoute = ({ component: Component,...rest }) => {
+
+  const { token } = useSelector((state) => state.register);
+
+  return(  
   
     <Route {...rest}
     render={ props =>
@@ -18,14 +21,8 @@ const PrivateRoute = ({ component: Component,auth: { token },...rest }) => (
       )
     }
   />
-);
+)
+}
 
-PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
-};
 
-const mapStateToProps = state => ({
-  auth: state.register
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

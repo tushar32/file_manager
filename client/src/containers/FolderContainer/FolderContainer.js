@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Images from './../../components/Images/Images';
+import { useSelector,shallowEqual } from "react-redux";
 
 import Actions from './../../components/Upload/Actions';
 
@@ -11,11 +12,13 @@ from './../../actions/nodeStructure';
 import { Modal, Form, Toast, Spinner } from 'react-bootstrap';
     
 
-const FolderContainer = ({  files : { nodeTreeFiles, loading },
+const FolderContainer = ({
     deleteFile, createFolder, renameFolder,createDocument,readFile,saveFile,
      deleteFolder,getFiles  }) => {
 
 
+    const { nodeTreeFiles,loading} = useSelector((state) => state.files,shallowEqual);
+    
     const path = nodeTreeFiles ? nodeTreeFiles.path : null;
     const current_path = nodeTreeFiles? nodeTreeFiles.current_path : null;
 
@@ -118,21 +121,18 @@ return loading && nodeTreeFiles === null ?  (
 
             { fileContent.isOpen ? (
                 <Fragment>
-               <Modal show={show} onHide={handleClose}>
-               <Modal.Header closeButton>
-                 <Modal.Title>{fileContent.name}</Modal.Title>
-               </Modal.Header>
-               <Modal.Body> 
-                    <Form.Control as="textarea" rows="50" onChange={e => handleChange(e) } 
-                     onKeyUp={e => handleSaveFile(e)}>
-                        { fileContent.content }
-                    </Form.Control>
-               </Modal.Body>
-              
-             </Modal>
-
-                
-           </Fragment>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{fileContent.name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body> 
+                                <Form.Control as="textarea" rows="50" onChange={e => handleChange(e) } 
+                                onKeyUp={e => handleSaveFile(e)}>
+                                    { fileContent.content }
+                                </Form.Control>
+                        </Modal.Body>                    
+                    </Modal>                
+                </Fragment>
             ) : ''
             }
             <Actions type={ nodeTreeFiles.root } goBack={handleGoBack } newFolder={ handleCreateFolder } 
@@ -165,7 +165,7 @@ return loading && nodeTreeFiles === null ?  (
                 
         </Fragment>
     )   
-    
+
 }
 
 FolderContainer.propTypes = {
