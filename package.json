@@ -37,7 +37,7 @@
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
-    "multer": "^1.4.2",
+    "multer": "^2.1.1",
     "raw.macro": "^0.3.0",
     "react-file-viewer": "^1.2.1",
     "readdirp": "^3.4.0",
